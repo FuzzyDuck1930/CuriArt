@@ -1,0 +1,70 @@
+import { artistData } from "./Data/data";
+import ArtistCard, {Attributes} from "./components/card/card";
+import Comments, {AttributesComments} from "./components/comments/comments";
+import Navegation, { AttributesNav } from "./components/Navbar/Navbar";
+
+
+class AppContainer extends HTMLElement{
+
+    card: ArtistCard[] = [];
+
+    constructor(){
+        super();
+        this.attachShadow({mode: "open"});
+
+        artistData.forEach((artist) => {
+            const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
+            cards.setAttribute(Attributes.profileimg,artist.profileimg);
+            cards.setAttribute(Attributes.username,artist.username);
+            cards.setAttribute(Attributes.occupation,artist.occupation);
+            cards.setAttribute(Attributes.description,artist.artwork.description);
+            cards.setAttribute(Attributes.image,artist.artwork.imageUrl);
+            
+        
+              
+            this.card.push(cards);
+            
+        })
+        
+
+    }
+
+    connectedCallback(){
+        this.render();
+    }
+
+ 
+    render() {
+
+        const nave = this.ownerDocument.createElement("nav");
+        const cardss = this.ownerDocument.createElement("my-navegation") as Navegation;
+            cardss.setAttribute(AttributesNav.Search, "Search");
+            cardss.setAttribute(AttributesNav.Settings, "Settings");
+            nave.appendChild(cardss);
+
+            this.shadowRoot.appendChild(nave);
+  
+  
+            if(this.shadowRoot){
+
+                this.card.forEach((artistcard) => {
+                    const container = document.createElement('div');
+                    container?.appendChild(artistcard);
+                    const commentsComponent = document.createElement('my-comments');
+                    commentsComponent.setAttribute("profileimg",  "./Icons and Pimage/250px-Mona_Lisa.jpg");
+                    commentsComponent.setAttribute("username", "Nombre_de_usuario");
+                    commentsComponent.setAttribute("textcomment", "Este es el texto del comentario");
+                    container.appendChild(commentsComponent);
+                    this.shadowRoot?.appendChild(container);
+
+                    
+})
+
+
+
+            }
+            
+        }}
+        
+
+customElements.define('app-container', AppContainer);
