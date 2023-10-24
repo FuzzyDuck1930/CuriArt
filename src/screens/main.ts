@@ -1,6 +1,9 @@
 import {artistData}from "../service/data";
 import ArtistCard, { Attributes } from "../components/Card/Card";
 import { AttributesComments } from "../components/Comments/comments";
+import { addObserver, appState, dispatch } from "../store/index";
+import { navigate } from "../store/actions";
+import { Screens } from "../types/navegation";
 import "../components/export";
 import "../components/nav/nav";
 import styleMain from "./main.css"
@@ -12,6 +15,7 @@ class Dashboard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    addObserver(this);
 
     artistData.forEach((artist) => {
       const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
