@@ -1,12 +1,18 @@
 import * as components from "./components/export";
 import "./components/export"
+import { navigate } from "./store/actions";
 import "./screens/main"
+import "./screens/profile"
+import { addObserver, appState } from "./store/index";
+import { Screens } from "./types/navegation";
+
 
 
 class AppContainer extends  HTMLElement {
     constructor() {
         super()
-        this.attachShadow({mode: "open"})
+        this.attachShadow({mode: "open"});
+        addObserver(this)
     }
 
     connectedCallback() {
@@ -15,11 +21,44 @@ class AppContainer extends  HTMLElement {
 
     render() {
         if(this.shadowRoot){
-        const dashboard = this.ownerDocument.createElement("app-dashboard")
-        this.shadowRoot?.appendChild(dashboard)
+            this.shadowRoot.innerHTML = "";
+            switch (appState.screen) {
+            //     case Screens.REGISTER:
+            //         const register = this.ownerDocument.createElement('app-register');
+            //         this.shadowRoot?.appendChild(register);
+            //         break;
+    
+                // case Screens.LOGIN:
+                //     const login = this.ownerDocument.createElement('app-login');
+                //     this.shadowRoot?.appendChild(login);
+                //     break;
+    
+                case Screens.DASHBOARD:
+                    const dashboard = this.ownerDocument.createElement('app-dashboard');
+                    this.shadowRoot?.appendChild(dashboard);
+                    break;
+    
+                case Screens.MOODBOARD:
+                    const favorites = this.ownerDocument.createElement('app-favorites');
+                    this.shadowRoot?.appendChild(favorites);
+                    break;
+    
+                case Screens.FRIENDS:
+                    const friends = this.ownerDocument.createElement('app-friends');
+                    this.shadowRoot?.appendChild(friends);
+                    break;
+    
+                case Screens.PROFILE:
+                    const profile = this.ownerDocument.createElement('app-profile');
+                    this.shadowRoot?.appendChild(profile);
+                    break;
+            
+                default:
+                    break;
+            }
+         }
         }
-    }
-}
+     }   
 
 customElements.define("app-container", AppContainer)
 export default AppContainer;
