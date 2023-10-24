@@ -1,0 +1,35 @@
+import { artistData } from "../Data/data";
+
+import Comments, { AttributesComments } from "../components/Comments/comments";
+import Navegation, { AttributesNav } from "../components/Navbar/Navbar";
+
+
+class AppContainer extends HTMLElement {
+  card: ArtistCard[] = [];
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+
+    artistData.forEach((artist) => {
+      const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
+      cards.setAttribute(Attributes.profileimg, artist.profileimg);
+      cards.setAttribute(Attributes.username, artist.username);
+      cards.setAttribute(Attributes.occupation, artist.occupation);
+      cards.setAttribute(Attributes.description, artist.artwork.description);
+      cards.setAttribute(Attributes.image, artist.artwork.imageUrl);
+
+      cards.setAttribute(Attributes.like, "../src/components/img/heart-regular.png");
+      cards.setAttribute(Attributes.save, "../src/components/img/bookmark-regular.png");
+
+      cards.addEventListener("likeClick", () => {
+        this.toggleLike(cards);
+      });
+      cards.addEventListener("saveClick", () => {
+        this.toggleSave(cards);
+      });
+
+
+this.card.push(cards);
+});
+}
