@@ -3,6 +3,7 @@ import ArtistCard, { Attributes } from "../components/Card/Card";
 import { AttributesComments } from "../components/Comments/comments";
 import "../components/export";
 import "../components/nav/nav";
+import styleMain from "./main.css"
 
 class Dashboard extends HTMLElement {
 
@@ -43,7 +44,7 @@ this.card.push(cards);
 
   render() {
     if (this.shadowRoot) {
-      this.shadowRoot.innerHTML = '';
+      this.shadowRoot.innerHTML = `<style>${styleMain}</style>`;
 
         const myNav = this.ownerDocument.createElement("my-nav");
         this.shadowRoot.appendChild(myNav);

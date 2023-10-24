@@ -1,9 +1,8 @@
 @media (min-width: 768px) {
     nav{
-    height: 10%;
-    z-index: 0;
     width: 12%;
-    flex-direction: column;
+
+    margin: 0;
     color: white;
     text-decoration: none;
     font-family: 'DM Sans', sans-serif;
@@ -26,7 +25,8 @@
     width: 90%;
     margin-left: 7%;
     margin-bottom: 22%;
-    margin-top: 15%;
+    margin-top: 15%;   
+     z-index: 0;
     }
 }
 

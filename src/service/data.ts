@@ -17,7 +17,7 @@ export const artistData = [
       artwork: {
         name: "Joker's Mania",
         description:
-          "This illustration captures the Joker in the midst of his mania. With a menacing grin and a glint of madness in his eyes, he exudes an aura of chaos.Offers a glimpse into the unpredictable and unnerving world of this iconic character.",
+          "This illustration captures the Joker in the midst of his mania. With a menacing grin and a glint of madness in his eyes, he exudes an aura of chaos.",
         imageUrl: "https://cdna.artstation.com/p/assets/images/images/014/370/176/large/enrique-sierra-h-joker.jpg?1543690876",
       },
     },
