@@ -1,3 +1,8 @@
+import filePro from "./Profile.css"
+import { navigate } from "../../store/actions";
+import { appState, dispatch } from "../../store/index";
+import { Screens } from "../../types/navegation";
+
 export enum AttributesProfile {
     "profileimg" = "profileimg",
     "username" = "username",
@@ -79,7 +84,7 @@ export enum AttributesProfile {
       if (this.shadowRoot) {
         this.shadowRoot.innerHTML = `
         <style>
-     
+        ${filePro}
         </style>
          
         `
@@ -104,11 +109,15 @@ export enum AttributesProfile {
         this.shadowRoot.appendChild(profiledesc)
   
         const profilebutton = this.ownerDocument.createElement("button");
-        profilebutton .innerHTML = `${this.follow}`;
+        profilebutton .innerHTML = `EDIT PROFILE`;
+        profilebutton.addEventListener("click", ()=>{
+            dispatch(navigate(Screens.EDIT)) })
         this.shadowRoot.appendChild(profilebutton )
   
-        container.appendChild(profilebutton)
+        
         container.appendChild(profileimage)
+        container.appendChild(profilename)
+        container.appendChild(profilemail)
         container.appendChild(profiledesc)
         container.appendChild(profilebutton)
   

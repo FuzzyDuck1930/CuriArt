@@ -1,0 +1,35 @@
+
+div {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+}
+
+
+img {
+    width: 15%;
+    border-radius: 50%; 
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 10px;
+    margin: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    color: white;
+}
+
+
+button {
+    background-color:#ff7903;;
+    color: #ffffff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}

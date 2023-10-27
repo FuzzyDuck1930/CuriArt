@@ -44,13 +44,15 @@
         margin-top: 2%;
         margin-bottom: 5%;
         padding: 2%;
-        border-style: solid;
+        border:none;
+        border-radius: 50px;
         width: 85%;
-        border-color: rgba(128, 128, 128, 0.274);
+        color: #181E1A;
+       background-color: #ffffff6f;
     }
 
     .commUser{
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .commSaid{
