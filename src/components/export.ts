@@ -7,3 +7,5 @@ export {default as NavLanding} from "./navLanding/navLanding"
 export {default as Navinvitation} from "../components/InvitationLanding/invitation"
 export {default as Invitation} from "../components/InvitationLanding/invitation"
 export {default as Artistpost } from "./Artistpost/Post"
+export {default as MoodBoardProfil } from "./Profilemood/Profilemood"
+

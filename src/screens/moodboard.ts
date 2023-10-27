@@ -29,7 +29,13 @@ class MoodBoard extends HTMLElement {
         const myNav = this.ownerDocument.createElement("my-nav");
         this.shadowRoot?.appendChild(myNav);
 
-     
+        const container = document.createElement("div");
+        container.classList.add("artist-card-moodboard");
+
+        const myMoodboard = this.ownerDocument.createElement("artist-moodboard")
+        this.shadowRoot?.appendChild(myMoodboard);
+        container.appendChild(myMoodboard)
+        this.shadowRoot?.appendChild(container);
 
     }}
   }
