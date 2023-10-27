@@ -1,0 +1,10 @@
+app-landing {
+    background-image: url('https://www.coladaweb.com/wp-content/uploads/2017/09/20170927-arte.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}

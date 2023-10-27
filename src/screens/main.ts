@@ -1,6 +1,6 @@
 import {artistData}from "../service/data";
 import ArtistCard, { Attributes } from "../components/Card/Card";
-import { AttributesComments } from "../components/Comments/comments";
+import { AttributesComments } from "../components/Comments/Comments";
 import { addObserver, appState, dispatch } from "../store/index";
 import { navigate } from "../store/actions";
 import { Screens } from "../types/navegation";
