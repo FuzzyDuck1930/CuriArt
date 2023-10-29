@@ -17,47 +17,48 @@ class Dashboard extends HTMLElement {
   }
 
   async connectedCallback() {
-    await this.loadData();
+   await this.loadData();
     this.render();
   }
 
-  async loadData() {
-    try {
-      const userData = await getUserData();
-      const postData = await getPostData();
-      console.log(userData)
-      console.log(postData)
+   async loadData() {
+     try {
+       const userData = await getUserData();
+       const postData = await getPostData();
+       console.log(userData)
+        console.log(postData)
 
-      userData.forEach((user) => {
-        const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
-        cards.setAttribute(Attributes.profileimg, user.profileimg);
-        cards.setAttribute(Attributes.username, user.username);
-        cards.setAttribute(Attributes.occupation, user.occupation);
+          userData.forEach((user) => {
+         const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
+         cards.setAttribute(Attributes.profileimg, user.profileimg);
+         cards.setAttribute(Attributes.username, user.username);
+         cards.setAttribute(Attributes.occupation, user.occupation);
 
         
-        // Encuentra el post correspondiente al usuario actual
-        const post = postData.find((post) => post.userId === user.id);
+         // Encuentra el post correspondiente al usuario actual
+         const post = postData.find((post) => post.userId === user.id);
 
-        if (post) {
-          // Si se encontró un post, configura la descripción e imagen del post
+         if (post) {
+           // Si se encontró un post, configura la descripción e imagen del post
           cards.setAttribute(Attributes.description, post.description);
-          cards.setAttribute(Attributes.image, post.imageUrl);
-        }
+           cards.setAttribute(Attributes.image, post.imageUrl);
+         }
 
-        cards.setAttribute(Attributes.like, "../../dist/img/Me gusta.png");
-        cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
+         cards.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
+         cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
 
-        this.card.push(cards);
+         this.card.push(cards);
         
-      });
-    } catch (error) {
-      console.error("Error al cargar datos de Firebase:", error);
-    }
-  }
+       });
+     } catch (error) {
+       console.error("Error al cargar datos de Firebase:", error);
+     }
+   }
 
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `<style>${styleMain}</style>`;
+      
 
       const myNav = this.ownerDocument.createElement("my-nav");
       this.shadowRoot.appendChild(myNav);
@@ -81,7 +82,20 @@ class Dashboard extends HTMLElement {
           cardContainer.appendChild(commentsComponent);
 
           container.appendChild(cardContainer);
+
+           usercard.querySelector(".like-button")?.addEventListener("click", () => {
+             // Obtiene el valor actual del atributo isLike
+             const currentIsLike = usercard.getAttribute(Attributes.isLike);
+            
+             // Alterna entre las imágenes heart-regular.png y heart-solid.png
+             if (currentIsLike === "../src/components/img/heart-regular.png") {
+               usercard.setAttribute(Attributes.isLike, "../src/components/img/heart-solid.png");
+             } else {
+               usercard.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
+             }
+           });
         });
+        
 
         this.shadowRoot?.appendChild(container);
       }

@@ -40,6 +40,7 @@ async function getPostData(): Promise<PostData[]> {
 }
 
 
+
 export {
   getUserData,
   getPostData
