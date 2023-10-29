@@ -1,10 +1,6 @@
 import * as components from "./components/export";
-import "./components/export"
 import { navigate } from "./store/actions";
 import "./screens/main"
-import "./screens/profile"
-import "./screens/landing"
-import "./screens/moodboard"
 import { addObserver, appState } from "./store/index";
 import { Screens } from "./types/navegation";
 
@@ -23,7 +19,7 @@ class AppContainer extends  HTMLElement {
 
     render() {
         if(this.shadowRoot){
-            this.shadowRoot.innerHTML = "";
+            this.shadowRoot.innerHTML = ``;
             switch (appState.screen) {
           
                 case Screens.LANDING:

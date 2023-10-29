@@ -1,4 +1,4 @@
-import {artistData}from "../service/data";
+
 import { AttributesProfile } from "../components/Profileinfo/Profileinfo";
 import NavButton from "../components/navButton/navButton";
 import "../components/export";
