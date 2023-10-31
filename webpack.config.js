@@ -4,6 +4,10 @@ module.exports = {
 entry: './src/index.ts',
 module: {
     rules: [
+        {
+            test: /\.css$/i,
+            use: ["css-loader"],
+          },
     {
         test: /\.tsx?$/,
         use: 'ts-loader',
