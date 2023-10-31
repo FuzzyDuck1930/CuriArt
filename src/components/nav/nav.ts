@@ -21,7 +21,7 @@ class Nav extends HTMLElement{
         if(this.shadowRoot){
             this.shadowRoot.innerHTML = ` <style>${styleNave}</style>`
 
-            
+
             const nav = this.ownerDocument.createElement("nav")
             this.shadowRoot.appendChild(nav);
 
@@ -53,7 +53,7 @@ class Nav extends HTMLElement{
             moodboard.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.MOODBOARD)) })
             nav.appendChild(moodboard);
-    
+
 
             const upload = this.ownerDocument.createElement("navegation-button")
             upload.setAttribute("icon", "/dist/img/Subir.png")
@@ -62,7 +62,7 @@ class Nav extends HTMLElement{
                 dispatch(navigate(Screens.UPLOAD)) })
             nav.appendChild(upload);
 
-            
+
             const butn = this.ownerDocument.createElement("button")
             butn.classList.add("mi-butn");
             const userimg = this.ownerDocument.createElement("img")
@@ -71,9 +71,9 @@ class Nav extends HTMLElement{
             userimg.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.PROFILE)) })
             nav.appendChild(setting);
-           
-           
-        
+
+
+
             butn.appendChild(userimg)
             nav.appendChild(butn);
 
