@@ -1,3 +1,5 @@
+import styleImput from "./imput.css"
+
 enum imputElement{
     "lePlace" = "lePlace",
 }
@@ -33,9 +35,9 @@ class imput extends HTMLElement {
 
     render(){
         if(this.shadowRoot){
-            this.shadowRoot.innerHTML = `<style></style>
+            this.shadowRoot.innerHTML = `<style>${styleImput}</style>
 
-            <input type="text" placeholder="${this.lePlace}">
+            <input type="text" class="inputt" placeholder="${this.lePlace}">
             `
         }
     }
