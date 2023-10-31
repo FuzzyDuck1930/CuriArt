@@ -1,0 +1,117 @@
+@media (min-width: 768px) {
+    * {
+        padding: 0;
+        color: white;
+        text-decoration: none;
+        list-style: none;
+        font-family: 'DM Sans', sans-serif;
+
+       
+     
+    }
+
+    .comment {
+        display: flex;
+        flex-direction: column;
+        margin-left:27.5%;
+        width: 55%;
+        padding-left: 3%;
+     
+    }
+
+.infoCom{
+    display: flex;
+    flex-direction: column;
+}
+
+.namYpro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+    .commProf {
+        width: 6%;
+        height: 6%;
+        max-width: 30px;
+        max-height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-box {
+        margin-top: 2%;
+        margin-bottom: 5%;
+        padding: 2%;
+        border-style: solid;
+        width: 85%;
+        border-color: rgba(128, 128, 128, 0.274);
+    }
+
+    .commUser{
+        font-size: 20px;
+    }
+
+    .commSaid{
+        margin-top: -0.5%;
+    }
+}
+
+@media (max-width: 767px) {
+    * {
+        padding: 0;
+        background-color: #181E1A;
+        color: white;
+        text-decoration: none;
+        list-style: none;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .comment {
+        display: flex;
+        flex-direction: column;
+        margin-left: 22%;
+        width: 55%;
+        padding-left: 3%;
+    }
+
+.infoCom{
+    display: flex;
+    flex-direction: column;
+}
+
+.namYpro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+    .commProf {
+        width: 6%;
+        height: 6%;
+        max-width: 30px;
+        min-width: 20px;
+        max-height: 20px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-box {
+        margin-bottom: 8%;
+        padding: 2%;
+        border-style: solid;
+        width: 85%;
+        border-color: rgba(128, 128, 128, 0.274);
+    }
+
+    .commUser{
+        font-size: 16px;
+    }
+
+    .commSaid{
+        margin-top: -4%;
+        font-size: 12px;
+    }
+}
