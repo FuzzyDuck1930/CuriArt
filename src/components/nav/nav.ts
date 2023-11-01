@@ -66,7 +66,7 @@ class Nav extends HTMLElement{
             const butn = this.ownerDocument.createElement("button")
             butn.classList.add("mi-butn");
             const userimg = this.ownerDocument.createElement("img")
-            userimg.setAttribute("src", "/dist/img/Usuario.jpg")
+            userimg.setAttribute("src", "https://media.illustrationx.com/images/artist/LiamBrazier/145761/crop/500/film-character.jpg")
             userimg.classList.add("mi-butn-img");
             userimg.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.PROFILE)) })

@@ -2,7 +2,7 @@ import * as components from "./components/export";
 import { navigate } from "./store/actions";
 import "./screens/main"
 import "./screens/profile"
-import "./components/nav/nav"
+import "./screens/moodboard"
 import { addObserver, appState } from "./store/index";
 import { Screens } from "./types/navegation";
 
@@ -33,6 +33,12 @@ class AppContainer extends  HTMLElement {
                     const register = this.ownerDocument.createElement('app-register');
                     this.shadowRoot?.appendChild(register);
                     break;
+
+                    case Screens. EDIT :
+                        const edit = this.ownerDocument.createElement('app-edit');
+                        this.shadowRoot?.appendChild(edit);
+                        break;
+        
     
                 case Screens.LOGIN:
                     const login = this.ownerDocument.createElement('app-login');
@@ -58,6 +64,11 @@ class AppContainer extends  HTMLElement {
                     const profile = this.ownerDocument.createElement('app-profile');
                     this.shadowRoot?.appendChild(profile);
                     break;
+
+                    case Screens.UPLOAD:
+                        const upload = this.ownerDocument.createElement('app-upload');
+                        this.shadowRoot?.appendChild(upload);
+                        break;
             
                 default:
                     break;

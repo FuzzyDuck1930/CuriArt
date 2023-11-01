@@ -1,7 +1,7 @@
 import styleCard from "./Card.css"
 import { dispatch } from "../../store";
 import { Actions } from "../../types/store";
-// import { like } from "../../store/actions";
+
 
 export enum Attributes {
   "profileimg" = "profileimg",

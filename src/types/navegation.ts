@@ -3,7 +3,6 @@ export enum Screens {
     LANDING = "LANDING",
     SIGNUP = "SIGNUP",
     DASHBOARD = "DASHBOARD",
-    SETTINGS = "SETTINGS",
     FRIENDS = "FRIENDS",
     EDIT = "EDIT",
     MOODBOARD = "MOODBOARD",

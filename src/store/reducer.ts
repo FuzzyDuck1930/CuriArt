@@ -7,7 +7,7 @@ export const reducer = (currentAction: any, currentState: any) => {
         case "NAVIGATE":
             currentState.screen = payload
         break;
-        
+
     
     }
     

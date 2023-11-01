@@ -1,6 +1,7 @@
 import { Screens } from "../types/navegation";
 import { PostData } from "../types/post";
-import { Actions} from "../types/store";
+import { Actions, DashboardActions} from "../types/store";
+
 
 export const navigate = (screen: Screens) => {
     return {
@@ -9,9 +10,3 @@ export const navigate = (screen: Screens) => {
     };
 };
 
-// export const like = () => {
-//   return {
-//     type: DashboardActions.LIKE,
-//   };
-// };
-  

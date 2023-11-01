@@ -5,7 +5,8 @@ import { Screens } from "../types/navegation";
 
 const emptyState = {
   screen: Screens.DASHBOARD,
-  // isLike: `../../dist/img/Me gusta.png`
+  
+
 };
 
 export let appState = Storage.get<AppState>({

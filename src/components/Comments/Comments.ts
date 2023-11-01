@@ -1,63 +1,72 @@
-import commStyle from "./Comments.css"
+import firebase from "../../utils/firebase";
+import commStyle from "./Comments.css";
 
-export enum AttributesComments {
-    "profileimg" = "profileimg",
-    "username" = "username",
-    "textcomment" = "textcomment",
+const formComment = {
+  text: "",
+};
+
+class Comments extends HTMLElement {
+  cardId?: string;
+
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.render();
   }
 
-export default class Comments extends HTMLElement {
-    profileimg?: string;
-    username?: string;
-    textcomment?: string;
+  connectedCallback() {
+    this.render();
+  }
 
-    static get observedAttributes() {
-      const attributes: Record<AttributesComments , null> = {
-        username: null,
-        textcomment: null,
-        profileimg: null,
-      };
-      return Object.keys(attributes);
-    }
+  changePhase(e: any) {
+    formComment.text = e.target.value;
+  }
 
-    attributeChangedCallback(
-      propName: AttributesComments ,
-      oldValue: string | undefined,
-      newValue: string | undefined
-    ) {
-      this[propName] = newValue;
-      this.render();
-    }
+  async saveComment() {
+    firebase.addComment(formComment);
+    
+  }
 
-    constructor() {
-      super();
-      this.attachShadow({ mode: "open" });
-      this.render();
-    }
-
-    connectedCallback() {
-      this.render();
-    }
-
-    render() {
-      if (this.shadowRoot) {
-        this.shadowRoot.innerHTML = `
+  async render() {
+    if (this.shadowRoot) {
+      this.shadowRoot.innerHTML = `
         <style>
         ${commStyle}
         </style>
-          <section class="comment">
-          <div class="infoCom">
-          <div class="namYpro">
-            <img class="commProf" src="${this.profileimg}" alt="artimage">
-            <h1 class="commUser">${this.username}</h1>
-            </div>
-            <p class="commSaid">${this.textcomment}</p>
-            </div>
-            <input type="text" class="comment-box" placeholder="Write your comment">
-          </section>
-        `;
-      }
+      `;
+
+      const container = this.ownerDocument.createElement("section");
+
+      const comment = this.ownerDocument.createElement("input");
+      comment.placeholder = "Write your comment";
+      comment.value = formComment.text;
+      comment.classList.add("comment-box");
+      comment.addEventListener("change", this.changePhase);
+
+      const save = this.ownerDocument.createElement("button");
+      save.innerHTML = "Send";
+      save.classList.add("comment-button");
+      save.addEventListener("click", this.saveComment);
+
+      this.shadowRoot?.appendChild(comment);
+      this.shadowRoot?.appendChild(save);
+      this.shadowRoot?.appendChild(container);
+
+      const comments = await firebase.getComment();
+
+      comments.forEach((comment: any) => {
+        const containercomment = this.ownerDocument.createElement("div");
+        const phase = this.ownerDocument.createElement("h4");
+        phase.innerHTML = comment.text;
+       phase.classList.add("comment-phase");
+        containercomment.appendChild(phase);
+
+        // Agregar el comentario al contenedor
+        container.appendChild(containercomment);
+      });
     }
+  }
 }
 
-  customElements.define("my-comments", Comments);
+customElements.define("my-comments", Comments);
+export default Comments;

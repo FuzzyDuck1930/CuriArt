@@ -6,8 +6,7 @@ import { Screens } from "../../types/navegation";
 export enum AttributesProfile {
     "profileimg" = "profileimg",
     "username" = "username",
-    "email" = "email",
-    "description" = "description",
+    "occupation" = "occupation",
     "follow"= "follow"
   
   }
@@ -17,17 +16,15 @@ export enum AttributesProfile {
     followButton?: HTMLButtonElement;
     profileimg?: string;
     username?: string;
-    email?: string;
-    description?: string;
+    occupation?: string;
     follow?:string;
   
   
     static get observedAttributes() {
       const attributes: Record<AttributesProfile, null> = {
         username: null,
-        email: null,
         profileimg: null,
-        description: null,
+        occupation: null,
         follow:null,
   
       };
@@ -46,17 +43,6 @@ export enum AttributesProfile {
     constructor() {
       super();
       this.attachShadow({ mode: "open" });
-      this.followButton = document.createElement("button");
-      this.followButton.classList.add("button-follow");
-  
-      this.followButton.textContent = "Follow";
-  
-  
-      this.followButton.addEventListener("click", () => {
-        this.toggleFollow();
-      });
-  
-      this.render();
     }
   
   
@@ -64,22 +50,7 @@ export enum AttributesProfile {
       this.render();
     }
   
-  
-    toggleFollow() {
-      if (this.followButton) {
-          
-        if (this.followButton.textContent === "Follow") {
-          this.followButton.textContent = "Following";
-        } else {
-          this.followButton.textContent = "Follow";
-         
-        }
-      }
-    }
-  
-  
-  
-    
+
     render() {
       if (this.shadowRoot) {
         this.shadowRoot.innerHTML = `
@@ -99,14 +70,9 @@ export enum AttributesProfile {
         profilename.innerHTML = `${this.username}`;
         this.shadowRoot.appendChild(profilename)
   
-        const profilemail = this.ownerDocument.createElement("p");
-        profilemail.innerHTML = `${this.email}`;
-        this.shadowRoot.appendChild(profilemail)
-  
-  
-        const profiledesc = this.ownerDocument.createElement("p");
-        profiledesc.innerHTML = `${this.description}`;
-        this.shadowRoot.appendChild(profiledesc)
+        const profileocup = this.ownerDocument.createElement("p");
+        profileocup.innerHTML = `${this.occupation}`;
+        this.shadowRoot.appendChild(profileocup)
   
         const profilebutton = this.ownerDocument.createElement("button");
         profilebutton .innerHTML = `EDIT PROFILE`;
@@ -117,8 +83,7 @@ export enum AttributesProfile {
         
         container.appendChild(profileimage)
         container.appendChild(profilename)
-        container.appendChild(profilemail)
-        container.appendChild(profiledesc)
+        container.appendChild(profileocup)
         container.appendChild(profilebutton)
   
         

@@ -4,25 +4,18 @@ import { appState, dispatch } from "../../store/index";
 import { Screens } from "../../types/navegation";
 
 export enum AttributesMoodboard {
-    "profileimg" = "profileimg",
-    // "inspiration" = "inspiration",
-    // "moodboard" = "moodboard",
+    "favimg" = "favimg",
 
   }
   
   class MoodBoardProfil extends HTMLElement {
   
-
-    profileimg?: string;
-    // inspiration?: string;
-    // moodboard?: string;
+    favimg?: string;
   
   
     static get observedAttributes() {
       const attributes: Record<AttributesMoodboard, null> = {
-        // moodboard: null,
-        // inspiration: null,
-        profileimg: null,
+        favimg: null,
        
   
       };
@@ -59,24 +52,17 @@ export enum AttributesMoodboard {
         const container = document.createElement("div")
         this.shadowRoot.appendChild(container)
   
-        const profileimage = this.ownerDocument.createElement("img");
-        profileimage.setAttribute( "src", `${this.profileimg}`)
-        this.shadowRoot.appendChild(profileimage)
-  
-        const inspiration = this.ownerDocument.createElement("p");
-        inspiration.innerHTML = `INSPIRATION`;
-        this.shadowRoot.appendChild(inspiration)
-
         const moodboard = this.ownerDocument.createElement("p");
         moodboard.innerHTML = `MOODBOARD`;
         this.shadowRoot.appendChild(moodboard)
   
-       
-  
-        
-        container.appendChild(profileimage)
-        container.appendChild(inspiration)
         container.appendChild(moodboard)
+        
+        const favoriteimage = this.ownerDocument.createElement("img");
+        favoriteimage.setAttribute( "src", `${this.favimg}`)
+        this.shadowRoot.appendChild( favoriteimage)
+        container.appendChild( favoriteimage)
+      
       
         
       }

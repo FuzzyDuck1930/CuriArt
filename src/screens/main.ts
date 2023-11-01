@@ -1,11 +1,11 @@
 import ArtistCard, { Attributes } from "../components/Card/Card";
-import { AttributesComments } from "../components/Comments/Comments";
+import Comment from "../components/Comments/Comments";
 import { addObserver, appState, dispatch } from "../store/index";
 import { navigate } from "../store/actions";
-import { Screens } from "../types/navegation";
-import "../components/export"
+import "../components/export";
 import styleMain from "./main.css";
-import { getUserData, getPostData } from "../service/firebase";
+import firebase from "../utils/firebase"
+import { getComment, addComment,getPostData, getUserData} from "../utils/firebase";
 
 class Dashboard extends HTMLElement {
   card: ArtistCard[] = [];
@@ -16,89 +16,80 @@ class Dashboard extends HTMLElement {
     addObserver(this);
   }
 
-  async connectedCallback() {
-   await this.loadData();
+   connectedCallback() {
     this.render();
   }
 
-   async loadData() {
-     try {
-       const userData = await getUserData();
-       const postData = await getPostData();
-       console.log(userData)
-        console.log(postData)
+  async render() {
 
-          userData.forEach((user) => {
-         const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
-         cards.setAttribute(Attributes.profileimg, user.profileimg);
-         cards.setAttribute(Attributes.username, user.username);
-         cards.setAttribute(Attributes.occupation, user.occupation);
-
-        
-         // Encuentra el post correspondiente al usuario actual
-         const post = postData.find((post) => post.userId === user.id);
-
-         if (post) {
-           // Si se encontró un post, configura la descripción e imagen del post
-          cards.setAttribute(Attributes.description, post.description);
-           cards.setAttribute(Attributes.image, post.imageUrl);
-         }
-
-         cards.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
-         cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
-
-         this.card.push(cards);
-        
-       });
-     } catch (error) {
-       console.error("Error al cargar datos de Firebase:", error);
-     }
-   }
-
-  render() {
-    if (this.shadowRoot) {
-      this.shadowRoot.innerHTML = `<style>${styleMain}</style>`;
+    try {
       
-
-      const myNav = this.ownerDocument.createElement("my-nav");
-      this.shadowRoot.appendChild(myNav);
+      const userData = await getUserData();
+      const postData = await getPostData();
+      console.log(userData);
+      console.log(postData);
 
       if (this.shadowRoot) {
-        const container = this.ownerDocument.createElement("div");
-        container.classList.add("user-card-container");
+        this.shadowRoot.innerHTML = `<style>${styleMain}</style>`;
 
-        this.card.forEach((usercard) => {
-          const cardContainer = this.ownerDocument.createElement("div");
-          cardContainer.classList.add("user-card");
-          cardContainer.appendChild(usercard);
-          const commentsComponent = this.ownerDocument.createElement("my-comments");
+        const myNav = this.ownerDocument.createElement("my-nav");
+        this.shadowRoot.appendChild(myNav);
 
-          commentsComponent.setAttribute(
-            AttributesComments.profileimg, "../../dist/img/Usuario.jpg"
-          );
-          commentsComponent.setAttribute(AttributesComments.username, "Maria");
-          commentsComponent.setAttribute(AttributesComments.textcomment, "Este es el texto del comentario");
+        if (this.shadowRoot) {
+          const container = this.ownerDocument.createElement("div");
+          container.classList.add("user-card-container");
 
-          cardContainer.appendChild(commentsComponent);
+          userData.forEach((user) => {
+            const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
+            cards.setAttribute(Attributes.profileimg, user.profileimg);
+            cards.setAttribute(Attributes.username, user.username);
+            cards.setAttribute(Attributes.occupation, user.occupation);
 
-          container.appendChild(cardContainer);
+            // Encuentra el post correspondiente al usuario actual
+            const post = postData.find((post) => post.userId === user.id);
 
-           usercard.querySelector(".like-button")?.addEventListener("click", () => {
-             // Obtiene el valor actual del atributo isLike
-             const currentIsLike = usercard.getAttribute(Attributes.isLike);
+            if (post) {
+              // Si se encontró un post, configura la descripción e imagen del post
+              cards.setAttribute(Attributes.description, post.description);
+              cards.setAttribute(Attributes.image, post.imageUrl);
+            }
+
+            cards.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
+            cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
+
+            this.card.push(cards);
+          });
+
+          this.card.forEach(async (usercard, index) => {
+            const cardContainer = this.ownerDocument.createElement("div");
+            cardContainer.classList.add("user-card");
+            cardContainer.appendChild(usercard);
+            const commentsComponent = this.ownerDocument.createElement("my-comments");
+            commentsComponent.setAttribute('cardId', index.toString()); 
+
+            const comments = await getComment(); // Suponiendo que deseas cargar comentarios específicos para cada tarjeta
+
+            comments.forEach((comment: any) => {
+              const containercomment = this.ownerDocument.createElement("div");
+              const phase = this.ownerDocument.createElement("h4");
+              phase.innerHTML = comment.text;
+              containercomment.appendChild(phase);
+
+              // Agregar el comentario al contenedor
+              container.appendChild(containercomment);
+            });
             
-             // Alterna entre las imágenes heart-regular.png y heart-solid.png
-             if (currentIsLike === "../src/components/img/heart-regular.png") {
-               usercard.setAttribute(Attributes.isLike, "../src/components/img/heart-solid.png");
-             } else {
-               usercard.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
-             }
-           });
-        });
-        
+            cardContainer.appendChild(commentsComponent);
+       
 
-        this.shadowRoot?.appendChild(container);
+            container.appendChild(cardContainer);
+          });
+
+          this.shadowRoot?.appendChild(container);
+        }
       }
+    } catch (error) {
+      console.error("Error al cargar datos de Firebase:", error);
     }
   }
 }

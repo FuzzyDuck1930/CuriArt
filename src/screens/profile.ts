@@ -1,50 +1,59 @@
-
 import { AttributesProfile } from "../components/Profileinfo/Profileinfo";
 import NavButton from "../components/navButton/navButton";
 import "../components/export";
-import "../components/nav/nav";
-import styleProfile from "./profile.css"
+import styleProfile from "./profile.css";
+import { getUserData, getPostData,getPostsByArtistId } from "../utils/firebase";
 
 class Profile extends HTMLElement {
-
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-
   }
-  
-  connectedCallback() {
+
+  async connectedCallback() {
     this.render();
   }
 
-
-  render() {
+  async render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `<style>${styleProfile}</style>`;
 
-        const myNav = this.ownerDocument.createElement("my-nav");
-        this.shadowRoot?.appendChild(myNav);
+      const myNav = this.ownerDocument.createElement("my-nav");
+      this.shadowRoot?.appendChild(myNav);
 
-        const Profilecont = this.ownerDocument.createElement("div");
-        Profilecont.classList.add("Profilecontainer");
-        this.shadowRoot?.appendChild(Profilecont);
+      const Profilecont = this.ownerDocument.createElement("div");
+      Profilecont.classList.add("Profilecontainer");
+      this.shadowRoot?.appendChild(Profilecont);
 
-        const myProfile = this.ownerDocument.createElement("artist-profile")
-        this.shadowRoot?.appendChild(myProfile);
+      const artistId = "Vzr3itFP1wwRWe24NSgK"; // El ID del artista deseado
+      const userData = await getUserData();
+      const user = userData.find((user) => user.id === artistId);
 
-        const myPost = this.ownerDocument.createElement("artist-post")
-        this.shadowRoot?.appendChild(myPost);
+      if (user) {
+        const myProfile = this.ownerDocument.createElement("artist-profile");
+        myProfile.setAttribute(AttributesProfile.profileimg, user.profileimg);
+        myProfile.setAttribute(AttributesProfile.username, user.username);
+        myProfile.setAttribute(AttributesProfile.occupation, user.occupation);
 
-  
-        Profilecont.appendChild(myProfile)
-        Profilecont.appendChild(myPost)
+        Profilecont.appendChild(myProfile);
 
-    
+  // Obtener los posts del artista utilizando la función getPostsByArtistId
+  const artistPosts = await getPostsByArtistId(artistId);
+  console.log(artistPosts);
 
-        
-      
-        }}
-  }
+  // Mostrar las imágenes de los posts
+  artistPosts.forEach((post) => {
+    const postImage = this.ownerDocument.createElement("img");
+    postImage.classList.add("upload-image")
+    postImage.src = post.imageUrl;
+    Profilecont.appendChild(postImage);
+  });
+} else {
+  console.error("Artista no encontrado");
+}
+}
+}
+}
 
 customElements.define("app-profile", Profile);
 export default Profile;
