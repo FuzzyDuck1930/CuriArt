@@ -67,15 +67,12 @@ class Dashboard extends HTMLElement {
             const commentsComponent = this.ownerDocument.createElement("my-comments");
             commentsComponent.setAttribute('cardId', index.toString()); 
 
-            const comments = await getComment(); (index.toString()); // Suponiendo que deseas cargar comentarios específicos para cada tarjeta
+            const comments = await getComment(); (index.toString()); 
   
-  // Agregar los comentarios a commentsComponent
-  
-  // Asegurarte de que commentsComponent se asocie a la tarjeta actual
+  /
   cardContainer.appendChild(commentsComponent);
   
 
-            
             cardContainer.appendChild(commentsComponent);
        
 
