@@ -35,14 +35,14 @@ class Nav extends HTMLElement{
 
             const setting = this.ownerDocument.createElement("navegation-button")
             setting.setAttribute("icon", "/dist/img/Ajustes.png")
-            setting.setAttribute("text","Ajustes" )
+            setting.setAttribute("text","Settings" )
             setting.addEventListener("click", ()=>{
-                dispatch(navigate(Screens.SETTINGS)) })
+                dispatch(navigate(Screens.EDIT)) })
             nav.appendChild(setting);
 
             const friends = this.ownerDocument.createElement("navegation-button")
             friends.setAttribute("icon", "/dist/img/Amigos.png")
-            friends.setAttribute("text","Amigos" )
+            friends.setAttribute("text","Friends" )
             friends.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.FRIENDS)) })
             nav.appendChild(friends);
@@ -57,7 +57,7 @@ class Nav extends HTMLElement{
 
             const upload = this.ownerDocument.createElement("navegation-button")
             upload.setAttribute("icon", "/dist/img/Subir.png")
-            upload.setAttribute("text","Subir" )
+            upload.setAttribute("text","Create" )
             setting.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.UPLOAD)) })
             nav.appendChild(upload);
@@ -66,7 +66,7 @@ class Nav extends HTMLElement{
             const butn = this.ownerDocument.createElement("button")
             butn.classList.add("mi-butn");
             const userimg = this.ownerDocument.createElement("img")
-            userimg.setAttribute("src", "/dist/img/Usuario.jpg")
+            userimg.setAttribute("src", "https://media.illustrationx.com/images/artist/LiamBrazier/145761/crop/500/film-character.jpg")
             userimg.classList.add("mi-butn-img");
             userimg.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.PROFILE)) })

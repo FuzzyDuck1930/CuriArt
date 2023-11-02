@@ -1,7 +1,6 @@
 @media (min-width: 768px) {
     nav{
     width: 12%;
-
     margin: 0;
     color: white;
     text-decoration: none;
@@ -21,28 +20,76 @@
     }
 
     .Logo {
-    
+
     width: 90%;
     margin-left: 7%;
     margin-bottom: 22%;
-    margin-top: 15%;   
+    margin-top: 15%;
      z-index: 0;
     }
 
     .mi-butn{
-        padding-top: 20%;
-        width: 70%;
-        height: 60%;
+
         background-color: transparent;
         border: none;
 
     }
 
     .mi-butn-img{
-        padding-top: 20%;
-        width:60%;
-        height: 70%;
-        border-radius: 50%;
-
+  border-radius: 100px;
     }
 }
+@media (max-width: 767px) {
+    nav {
+      display: flex;
+      margin-top: 98%;
+      position: fixed;
+      width: 12%;
+      color: white;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .userimg {
+      margin-top: 100%;
+      height: 5%;
+      width: 5%;
+      margin-left: 20%;
+      position: relative;
+      border-radius: 50%;
+      top: 60px;
+    }
+
+    .Logo {
+      width: 90%;
+      margin-left: 7%;
+      margin-bottom: 22%;
+      margin-top: 15%;
+      z-index: 0;
+    }
+
+    .mi-butn {
+      padding-top: 20%;
+      width: 70%;
+      height: 60%;
+      background-color: transparent;
+      border: none;
+    }
+
+    .mi-butn-img {
+      padding-top: 20%;
+      width: 60%;
+      height: 70%;
+      border-radius: 50%;
+    }
+
+    /* Ocultar títulos y mostrar solo el icono en la parte de abajo */
+    .nav-title {
+      display: none;
+    }
+
+    .nav-icon {
+      display: block; /* Asegura que el icono se muestre */
+      margin-top: 20px; /* Ajusta el margen según tus necesidades */
+    }
+  }
