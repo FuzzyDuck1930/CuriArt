@@ -4,7 +4,7 @@ import { appState, dispatch } from "../store/index";
 import { ScreenActions } from "../types/store";
 import "../components/export";
 
-class Friends extends HTMLElement {
+class Register extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -18,14 +18,15 @@ class Friends extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {this.shadowRoot.innerHTML = ``;
 
-        const myNav = this.ownerDocument.createElement("my-nav");
+        const myNav = this.ownerDocument.createElement("my-nav-landing");
         this.shadowRoot?.appendChild(myNav);
 
-        const myCard = this.ownerDocument.createElement("friend-card");
-        this.shadowRoot?.appendChild(myCard)
+		const loginCard = this.ownerDocument.createElement("my-sign");
+        this.shadowRoot?.appendChild(loginCard);
+
 	}
 	}
 }
 
-customElements.define('app-friends', Friends);
-export default Friends;
+customElements.define('app-register', Register);
+export default Register;

@@ -1,11 +1,14 @@
-import "../components/export"
-import { addObserver, appState, dispatch } from '../store/index';
+import { addObserver } from "../store";
+import { Screens } from "../types/navegation";
+import { appState, dispatch } from "../store/index";
+import { ScreenActions } from "../types/store";
+import "../components/export";
 
 class Login extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
-		addObserver(this);
+        addObserver(this)
 	}
 
 	connectedCallback() {
@@ -15,25 +18,12 @@ class Login extends HTMLElement {
 	render() {
 		if (this.shadowRoot) {this.shadowRoot.innerHTML = ``;
 
-		const loginCard = this.ownerDocument.createElement("div");
-        this.shadowRoot.appendChild(loginCard);
+        const myNav = this.ownerDocument.createElement("my-nav-landing");
+        this.shadowRoot?.appendChild(myNav);
 
-		const theTitle = this.ownerDocument.createElement("h1");
-		theTitle.textContent = "Login";
-		loginCard.appendChild(theTitle)
+		const loginCard = this.ownerDocument.createElement("my-log");
+        this.shadowRoot?.appendChild(loginCard);
 
-        const theSpace1 = this.ownerDocument.createElement("my-input");
-        loginCard.appendChild(theSpace1);
-
-		const theSpace2  = this.ownerDocument.createElement("my-input");
-        loginCard.appendChild(theSpace2);
-
-		const theButton = this.ownerDocument.createElement("my-newtton");
-		loginCard.appendChild(theButton);
-
-		const theTerm = this.ownerDocument.createElement("p");
-		theTerm.textContent = "Dont have an account? Sign Up";
-		loginCard.appendChild(theTerm)
 	}
 	}
 }
