@@ -8,14 +8,17 @@ const formComment = {
 class Comments extends HTMLElement {
   cardId?: string;
 
-  constructor() {
+  constructor(cardId: string) {
     super();
     this.attachShadow({ mode: "open" });
+    this.cardId = cardId;
     this.render();
   }
 
   connectedCallback() {
     this.render();
+    const cardId = this.getAttribute('cardId');
+
   }
 
   changePhase(e: any) {
@@ -23,6 +26,7 @@ class Comments extends HTMLElement {
   }
 
   async saveComment() {
+    console.log(formComment)
     firebase.addComment(formComment);
     
   }

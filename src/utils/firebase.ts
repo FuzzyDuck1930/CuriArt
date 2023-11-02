@@ -10,6 +10,17 @@ import { Comments } from "../components/export";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+export const addPost = async (post:any) => {
+  try {
+    const postData = collection (db, "post");
+    await addDoc(postData,post)
+    console.log("Se añadio un post")
+    
+  } catch (error) {
+    console.error(error);
+    
+  }
+}
 
  const userCollection = collection(db, "user")
  const postCollection = collection(db, "post");
@@ -83,5 +94,6 @@ export default {
   getPostData,
   getComment,
   addComment,
-  getPostsByArtistId
+  getPostsByArtistId,
+  addPost,
 }

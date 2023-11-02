@@ -3,6 +3,8 @@ import { navigate } from "./store/actions";
 import "./screens/main"
 import "./screens/profile"
 import "./screens/moodboard"
+import "./screens/upload"
+import "./screens/landing"
 import { addObserver, appState } from "./store/index";
 import { Screens } from "./types/navegation";
 

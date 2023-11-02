@@ -35,14 +35,14 @@ class Nav extends HTMLElement{
 
             const setting = this.ownerDocument.createElement("navegation-button")
             setting.setAttribute("icon", "/dist/img/Ajustes.png")
-            setting.setAttribute("text","Ajustes" )
+            setting.setAttribute("text","Setting" )
             setting.addEventListener("click", ()=>{
-                dispatch(navigate(Screens.SETTINGS)) })
+                dispatch(navigate(Screens.EDIT)) })
             nav.appendChild(setting);
 
             const friends = this.ownerDocument.createElement("navegation-button")
             friends.setAttribute("icon", "/dist/img/Amigos.png")
-            friends.setAttribute("text","Amigos" )
+            friends.setAttribute("text","Friends" )
             friends.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.FRIENDS)) })
             nav.appendChild(friends);
@@ -57,8 +57,8 @@ class Nav extends HTMLElement{
 
             const upload = this.ownerDocument.createElement("navegation-button")
             upload.setAttribute("icon", "/dist/img/Subir.png")
-            upload.setAttribute("text","Subir" )
-            setting.addEventListener("click", ()=>{
+            upload.setAttribute("text","Create" )
+            upload.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.UPLOAD)) })
             nav.appendChild(upload);
 

@@ -1,29 +1,32 @@
-import fileMood from "./ProfileMoodboard.css"
+import fileMood from "./Mood.css"
 import { navigate } from "../../store/actions";
 import { appState, dispatch } from "../../store/index";
 import { Screens } from "../../types/navegation";
 
-export enum AttributesMoodboard {
-    "favimg" = "favimg",
-
+export enum AttributesMoodBoard{
+    "titlemood"="titlemood",
+    "profileimg" = "profileimg",
+    "username" = "username",
   }
   
-  class MoodBoardProfil extends HTMLElement {
-  
-    favimg?: string;
+  class Mood extends HTMLElement {
+    titlemood?: string;
+    profileimg?: string;
+    username?: string;
+   
   
   
     static get observedAttributes() {
-      const attributes: Record<AttributesMoodboard, null> = {
-        favimg: null,
-       
-  
+      const attributes: Record<AttributesMoodBoard, null> = {
+        username: null,
+        profileimg: null,
+        titlemood: null,
       };
       return Object.keys(attributes);
     }
   
     attributeChangedCallback(
-      propName: AttributesMoodboard,
+      propName: AttributesMoodBoard,
       oldValue: string | undefined,
       newValue: string | undefined
     ) {
@@ -40,7 +43,8 @@ export enum AttributesMoodboard {
     connectedCallback() {
       this.render();
     }
-    
+  
+
     render() {
       if (this.shadowRoot) {
         this.shadowRoot.innerHTML = `
@@ -51,22 +55,29 @@ export enum AttributesMoodboard {
         `
         const container = document.createElement("div")
         this.shadowRoot.appendChild(container)
+
+        const title = document.createElement("h1")
+        title.innerHTML = `Moodboard`
+        this.shadowRoot.appendChild(title)
   
-        const moodboard = this.ownerDocument.createElement("p");
-        moodboard.innerHTML = `MOODBOARD`;
-        this.shadowRoot.appendChild(moodboard)
+        const profileimage = this.ownerDocument.createElement("img");
+        profileimage.setAttribute( "src", `${this.profileimg}`)
+        this.shadowRoot.appendChild(profileimage)
   
-        container.appendChild(moodboard)
+        const profilename = this.ownerDocument.createElement("p");
+        profilename.innerHTML = `${this.username}`;
+        this.shadowRoot.appendChild(profilename)
+  
+  
+  
         
-        const favoriteimage = this.ownerDocument.createElement("img");
-        favoriteimage.setAttribute( "src", `${this.favimg}`)
-        this.shadowRoot.appendChild( favoriteimage)
-        container.appendChild( favoriteimage)
-      
-      
+        container.appendChild(profileimage)
+        container.appendChild(profilename)
+       container.appendChild(title)
+  
         
       }
     }}
   
-  customElements.define("artist-moodboard", MoodBoardProfil );
-  export default MoodBoardProfil ;
+  customElements.define("artist-mood",  Mood);
+  export default  Mood;
