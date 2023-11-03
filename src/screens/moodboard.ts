@@ -50,7 +50,7 @@ class MoodBoard extends HTMLElement {
           // Mostrar las imágenes de los favoritos del artista
           artistFavorites.forEach((favorites) => {
             const postImage = this.ownerDocument.createElement("img");
-            postImage.setAttribute()
+            // postImage.setAttribute("src")
             postImage.classList.add("upload-image");
             postImage.src = favorites.postId;
             Profileconst.appendChild(postImage);

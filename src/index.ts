@@ -8,6 +8,7 @@ import "./screens/upload"
 import "./screens/landing"
 import "./screens/login"
 import "./screens/friends"
+import "./screens/edit"
 import { addObserver, appState } from "./store/index";
 import { Screens } from "./types/navegation";
 
