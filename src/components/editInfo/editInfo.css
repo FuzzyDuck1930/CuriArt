@@ -1,0 +1,40 @@
+@media (min-width: 768px) {
+    *{
+    width: 40%;
+    color: white;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    }
+
+.e-img{
+    background-color: #D2A268;
+    color: black;
+    border-style: none;
+}
+
+.profile-image{
+    border-radius: 50%;
+}
+
+.save-all{
+    background-color: #D2A268;
+    color: black;
+    border-style: none;
+}
+
+.imputt{
+    background-color: rgba(227, 141, 42, 0.46);
+    border-style: none;
+    border-radius: 15px;
+}
+
+}
+@media (max-width: 767px) {
+    * {
+    width: 90%;
+    color: white;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    }
+}

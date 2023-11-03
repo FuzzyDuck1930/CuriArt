@@ -1,3 +1,5 @@
+import { Actions,AppState } from "../types/store";
+
 export const reducer = (currentAction: any, currentState: any) => {
     const { type, payload } = currentAction; 
 
@@ -5,7 +7,10 @@ export const reducer = (currentAction: any, currentState: any) => {
         case "NAVIGATE":
             currentState.screen = payload
         break;
+
+    
     }
+    
 
     return currentState;
 }

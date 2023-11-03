@@ -1,8 +1,8 @@
 import { dispatch } from "../../store";
 import { Actions } from "../../types/store";
+import styleFriend from "./cardFriend.css"
 
-
-export enum Attributes {
+export enum AttributesFriends {
   "friendProfile" = "friendProfile",
   "friendName" = "friendName",
   "friendOccupation" = "friendOccupation",
@@ -17,7 +17,7 @@ class cardFriend extends HTMLElement {
 
 
   static get observedAttributes() {
-    const attributes: Record<Attributes, null> = {
+    const attributes: Record<AttributesFriends, null> = {
       friendProfile: null,
       friendName: null,
       friendOccupation: null,
@@ -27,7 +27,7 @@ class cardFriend extends HTMLElement {
   }
 
   attributeChangedCallback(
-    propName: Attributes,
+    propName: AttributesFriends,
     oldValue: string | undefined,
     newValue: string | undefined
   ) {
@@ -49,17 +49,15 @@ class cardFriend extends HTMLElement {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
       <style>
+      ${styleFriend}
       </style>
-      <div>
-      <div>
+      <div class="cont-all">
+      <div class="cont-image">
       <img class="profile-image" src="${this.friendProfile}" alt="imagen de perfil">
       </div>
-      <div>
-      <p>${this.friendName}</p>
-      <p>${this.friendOccupation}</p>
-      </div>
-      <div>
-      <button>View profile</button>
+      <div class="cont-info">
+      <b><p class="userName">${this.friendName}</p></b>
+      <p class="userOcc">${this.friendOccupation}</p>
       </div>
       </div>
       `

@@ -1,4 +1,4 @@
-
+import styleEdit from "./editInfo.css"
 import { dispatch } from "../../store";
 import { Actions } from "../../types/store";
 
@@ -59,25 +59,25 @@ import { Actions } from "../../types/store";
         if (this.shadowRoot) {
         this.shadowRoot.innerHTML = `
         <style>
-
+        ${styleEdit}
         </style>
         <div>
-        <img class="profile-image" src="${this.profileimg}" alt="imagen de perfil">
-        <button>Edit image</button>
+        <img class="profile-image" src="https://media.illustrationx.com/images/artist/LiamBrazier/145761/crop/500/film-character.jpg" alt="imagen de perfil">
+        <button class="e-img">Edit image</button>
         </div>
 
         <div>
         <p>Username</p>
-        <input type="text" value="${this.username}">
+        <input class="imputt" type="text">
         <p>Password</p>
-        <input type="text" value="${this.password}">
+        <input class="imputt" type="text">
         <p>Email</p>
-        <input type="text" value="${this.email}">
+        <input class="imputt" type="text">
         <p>Work file</p>
-        <input type="text" value="${this.occupation}">
+        <input class="imputt" type="text">
         <p>Description</p>
-        <input type="text" value="${this.userDescription}">
-        <button>Save changes</button>
+        <input class="imputt" type="text">
+        <button class="save-all">Save changes</button>
         </div>
         `
         }

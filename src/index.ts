@@ -1,8 +1,9 @@
 import * as components from "./components/export";
-import "./components/export"
 import { navigate } from "./store/actions";
-import "./screens/main"
-import "./screens/profile"
+import "./screens/login"
+import "./screens/signUp"
+import "./screens/friends"
+import "./screens/editIt"
 import { addObserver, appState } from "./store/index";
 import { Screens } from "./types/navegation";
 
@@ -21,26 +22,23 @@ class AppContainer extends  HTMLElement {
 
     render() {
         if(this.shadowRoot){
-            this.shadowRoot.innerHTML = "";
+            this.shadowRoot.innerHTML = ``;
             switch (appState.screen) {
-            //     case Screens.REGISTER:
-            //         const register = this.ownerDocument.createElement('app-register');
-            //         this.shadowRoot?.appendChild(register);
-            //         break;
 
-                // case Screens.LOGIN:
-                //     const login = this.ownerDocument.createElement('app-login');
-                //     this.shadowRoot?.appendChild(login);
-                //     break;
-
-                case Screens.DASHBOARD:
-                    const dashboard = this.ownerDocument.createElement('app-dashboard');
-                    this.shadowRoot?.appendChild(dashboard);
+                case Screens.SIGNUP:
+                    const register = this.ownerDocument.createElement('app-register');
+                    this.shadowRoot?.appendChild(register);
                     break;
 
-                case Screens.MOODBOARD:
-                    const favorites = this.ownerDocument.createElement('app-favorites');
-                    this.shadowRoot?.appendChild(favorites);
+                    case Screens.EDIT :
+                        const edit = this.ownerDocument.createElement('app-edit');
+                        this.shadowRoot?.appendChild(edit);
+                        break;
+
+
+                case Screens.LOGIN:
+                    const login = this.ownerDocument.createElement('app-login');
+                    this.shadowRoot?.appendChild(login);
                     break;
 
                 case Screens.FRIENDS:
@@ -48,13 +46,6 @@ class AppContainer extends  HTMLElement {
                     this.shadowRoot?.appendChild(friends);
                     break;
 
-                case Screens.PROFILE:
-                    const profile = this.ownerDocument.createElement('app-profile');
-                    this.shadowRoot?.appendChild(profile);
-                    break;
-
-                default:
-                    break;
             }
         }
         }

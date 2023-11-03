@@ -3,6 +3,8 @@ import { Screens } from "../types/navegation";
 import { appState, dispatch } from "../store/index";
 import { ScreenActions } from "../types/store";
 import "../components/export";
+import { getUserData, getFriendsData, getFriendsById } from "../utils/firebase";
+import { AttributesFriends } from "../components/cardFriend/cardFriend";
 
 class Friends extends HTMLElement {
 	constructor() {
@@ -11,18 +13,19 @@ class Friends extends HTMLElement {
         addObserver(this)
 	}
 
-	connectedCallback() {
-		this.render();
+	async connectedCallback() {
+		await this.render();
 	}
 
-	render() {
+	async render() {
 		if (this.shadowRoot) {this.shadowRoot.innerHTML = ``;
 
         const myNav = this.ownerDocument.createElement("my-nav");
         this.shadowRoot?.appendChild(myNav);
 
-        const myCard = this.ownerDocument.createElement("friend-card");
-        this.shadowRoot?.appendChild(myCard)
+		const friendCard = this.ownerDocument.createElement("friend-card");
+		this.shadowRoot?.appendChild(friendCard);
+
 	}
 	}
 }

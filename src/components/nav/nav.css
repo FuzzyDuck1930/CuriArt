@@ -5,6 +5,7 @@
     color: white;
     text-decoration: none;
     font-family: 'DM Sans', sans-serif;
+    position: fixed;
     }
 
 
@@ -20,12 +21,11 @@
     }
 
     .Logo {
-
     width: 90%;
     margin-left: 7%;
     margin-bottom: 22%;
     margin-top: 15%;
-     z-index: 0;
+    z-index: 0;
     }
 
     .mi-butn{
@@ -36,15 +36,18 @@
     }
 
     .mi-butn-img{
-  border-radius: 100px;
+  border-radius: 50%;
+  width: 40%;
+      height: 40%;
+      margin-top: 10%;
     }
 }
 @media (max-width: 767px) {
     nav {
       display: flex;
-      margin-top: 98%;
       position: fixed;
-      width: 12%;
+      background-color: #6A5B4A;
+      width: 100%;
       color: white;
       text-decoration: none;
       font-family: 'DM Sans', sans-serif;
@@ -55,31 +58,27 @@
       height: 5%;
       width: 5%;
       margin-left: 20%;
-      position: relative;
       border-radius: 50%;
       top: 60px;
     }
 
     .Logo {
-      width: 90%;
-      margin-left: 7%;
-      margin-bottom: 22%;
-      margin-top: 15%;
-      z-index: 0;
+      display: none;
     }
 
     .mi-butn {
       padding-top: 20%;
-      width: 70%;
-      height: 60%;
+      width: 6%;
+      height: 6%;
       background-color: transparent;
       border: none;
+      position: fixed;
     }
 
     .mi-butn-img {
       padding-top: 20%;
-      width: 60%;
-      height: 70%;
+      width: 5%;
+      height: 5%;
       border-radius: 50%;
     }
 

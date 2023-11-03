@@ -22,7 +22,6 @@ class NavButton extends HTMLElement {
             this[propName] = newValue;
             break;
         }
-
         
     }
 
