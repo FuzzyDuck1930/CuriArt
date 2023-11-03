@@ -29,6 +29,9 @@ class NavLanding extends HTMLElement{
 
             const Logo = this.ownerDocument.createElement("img")
             Logo.setAttribute("src", "/dist/img/CURIART.png")
+            Logo.setAttribute("class", "Logo")
+            Logo.addEventListener("click", ()=>{
+                dispatch(navigate(Screens.LANDING)) })
             nav.appendChild(Logo);
             
             const logIn = this.ownerDocument.createElement("button")

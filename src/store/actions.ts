@@ -1,5 +1,5 @@
 import { Screens } from "../types/navegation";
-import { PostData } from "../types/post";
+
 import { Actions, DashboardActions} from "../types/store";
 
 

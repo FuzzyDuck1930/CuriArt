@@ -9,7 +9,7 @@ export enum Attributes {
   "occupation" = "occupation",
   "description" = "description",
   "image" = "image",
-  "isLike"="isLike",
+  "like"="like",
   "save"="save",
   "follow"= "follow"
 
@@ -23,7 +23,7 @@ class ArtistCard extends HTMLElement {
   occupation?: string;
   description?: string;
   image?: string;
-  isLike?: string;
+  like?: string;
   save?: string;
   follow?:string;
 
@@ -35,7 +35,7 @@ class ArtistCard extends HTMLElement {
       description: null,
       image: null,
       profileimg: null,
-      isLike:null,
+      like:null,
       save:null,
       follow:null,
 
@@ -55,17 +55,17 @@ class ArtistCard extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    // this.followButton = document.createElement("button");
-    // this.followButton.classList.add("button-follow");
+     this.followButton = document.createElement("button");
+     this.followButton.classList.add("button-follow");
 
-    // this.followButton.textContent = "Follow";
+     this.followButton.textContent = "Follow";
 
 
-    // this.followButton.addEventListener("click", () => {
-    //   this.toggleFollow();
-    // });
+     this.followButton.addEventListener("click", () => {
+       this.toggleFollow();
+     });
 
-    this.isLike = "../../../dist/img/Me gusta.png";
+  
     this.render();
   }
 
@@ -75,40 +75,40 @@ class ArtistCard extends HTMLElement {
   }
 
 
-  // toggleFollow() {
-  //   if (this.followButton) {
+  toggleFollow() {
+    if (this.followButton) {
         
-  //     if (this.followButton.textContent === "Follow") {
-  //       this.followButton.textContent = "Following";
-  //     } else {
-  //       this.followButton.textContent = "Follow";
+      if (this.followButton.textContent === "Follow") {
+        this.followButton.textContent = "Following";
+      } else {
+        this.followButton.textContent = "Follow";
        
-  //     }
-  //   }
-  // }
+       }
+     }
+   }
 
-  // toggleLike() {
-  //   if (this.like) {
-  //     if (this.like === "../src/components/img/heart-regular.png") {
-  //       this.like = "../src/components/img/heart-solid.png";
-  //     } else {
-  //       this.like = "../src/components/img/heart-regular.png";
-  //     }
+  toggleLike() {
+     if (this.like) {
+      if (this.like === "../../../dist/img/Me gusta.png") {
+        (this.like = "../../../dist/img/Me gusta soid.png");
+       } else {
+        this.like = "../../../dist/img/Me gusta.png";
+       }
 
-  //     this.render();
-  //   }
-  // }
+       this.render();
+     }
+   }
 
-  // toggleLike() {
-  //   console.log("Botón de 'like' clicado"); // Agrega este log para verificar si la función se ejecuta
-  //   dispatch(like());
-  //   if (this.isLike?.endsWith("Me gusta.png")) {
-  //     this.isLike = "../../../dist/img/Me gusta soid.png";
-  //   } else {
-  //     this.isLike = "../../../dist/img/Me gusta.png";
-  //   }
-  //   this.render();
-  // }
+//   toggleLike() {
+//      console.log("Botón de 'like' clicado"); // Agrega este log para verificar si la función se ejecuta
+//      dispatch(like());
+//      if (this.like?.endsWith("Me gusta.png")) {
+//        this.like = "../../../dist/img/Me gusta soid.png";
+//      } else {
+//        this.isLike = "../../../dist/img/Me gusta.png";
+//      }
+//      this.render();
+//  }
 
 
 
@@ -129,7 +129,7 @@ class ArtistCard extends HTMLElement {
           <p class="desc">${this.description}</p>
           <img class="theArt" src="${this.image}" alt="Obra del artista">
           <div class="profile-description">
-          <button class="like-button"><img class="like-image" src="${this.isLike}" alt="icono like"></button>
+          <button class="like-button"><img class="like-image" src="${this.like}" alt="icono like"></button>
         <button class="save-button"><img class="save-image" src="${this.save}" alt="icono save"></button>
         </div>
         </div>
@@ -138,12 +138,12 @@ class ArtistCard extends HTMLElement {
         this.shadowRoot.querySelector("div")?.insertBefore(this.followButton, this.shadowRoot.querySelector("p"));
       }
 
-      // const likeButton = this.shadowRoot.querySelector(".like-button");
-      // if (likeButton) {
-      //   likeButton.addEventListener("click", () => {
-      //     this.toggleLike();
-      //   });
-      // }
+       const likeButton = this.shadowRoot.querySelector(".like-button");
+       if (likeButton) {
+         likeButton.addEventListener("click", () => {
+           this.toggleLike();
+         });
+       }
         
       }
     

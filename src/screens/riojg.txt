@@ -1,0 +1,58 @@
+import { addObserver } from "../store";
+import { Screens } from "../types/navegation";
+import { appState, dispatch } from "../store/index";
+import { ScreenActions } from "../types/store";
+import "../components/export";
+import { getUserData, getFriends, addFriend } from "../utils/firebase";
+import { AttributesFriends } from "../components/cardFriends/cardFriends";
+
+class Friends extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    addObserver(this);
+  }
+
+  async connectedCallback() {
+    await this.render();
+  }
+
+  async render() {
+    if (this.shadowRoot) {
+      this.shadowRoot.innerHTML = `
+      `;
+
+      const myNav = this.ownerDocument.createElement("my-nav");
+      this.shadowRoot?.appendChild(myNav);
+
+      const container = this.ownerDocument.createElement("div");
+      this.shadowRoot.appendChild(container)
+
+      const friends = await getFriends();
+      const userData = await getUserData();
+
+      // Muestra los amigos en la consola
+      console.log(friends);
+
+      friends.forEach((friend) => {
+        // Puedes utilizar el componente friend-card para mostrar los datos de un amigo
+        const friendCard = this.ownerDocument.createElement("friend-card");
+        
+        // Encuentra el usuario correspondiente a este amigo
+        const user = userData.find((u) => u.id === friend.userId);
+
+        if (user) {
+          // Aquí configura los atributos del friend-card utilizando los datos del amigo y el usuario
+          friendCard.setAttribute(AttributesFriends.friendName, user.username);
+          friendCard.setAttribute(AttributesFriends.friendOccupation, user.occupation);
+          // Otros atributos según lo que necesites mostrar
+
+          container.appendChild(friendCard);
+        }
+      });
+    }
+  }
+}
+
+customElements.define('app-friends', Friends);
+export default Friends;

@@ -11,6 +11,7 @@ import ArtistCard, { Attributes } from "../components/Card/Card";
  const formPost = {
   imageUrl: "",
   description: "",
+  userId: "",
 };
  class  Upload extends HTMLElement {
 
@@ -24,7 +25,9 @@ import ArtistCard, { Attributes } from "../components/Card/Card";
    }
    
   async savePost() {
-    console.log(formPost)
+    const userId = "Vzr3itFP1wwRWe24NSgK"; 
+    formPost.userId = userId; 
+    console.log(formPost);
     firebase.addPost(formPost);
   }
 

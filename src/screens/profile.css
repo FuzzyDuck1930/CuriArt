@@ -1,8 +1,37 @@
-.Profilecontainer{
+@media (max-width: 768px) {
+    .Profilecontainer{
     z-index: 2;
     margin-top: 0px;
 
 }
 .upload-image{
-    width: 30%;
+    width: 9px;
+    height: auto;
 }
+
+.Profilecont{
+    margin-left: 20%;
+  
+}}
+
+
+@media (max-width: 767px) {
+    .Profilecontainer{
+    z-index: 2;
+    margin-top: 0px;
+
+}
+.upload-image{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom:5% ;
+    border-radius: 20px;
+    margin-left: -8%;   
+}
+
+.Profilecont{
+    margin-left: 20%;
+  
+
+}}

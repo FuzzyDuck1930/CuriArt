@@ -1,4 +1,4 @@
 export interface FavoriteData {
-    imageUrl: string;
-   
+    postId: string;
+   userId: string;
 }

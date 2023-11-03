@@ -1,4 +1,4 @@
-
+@media (min-width: 768px) {
 div {
     z-index: 1;
     display: flex;
@@ -6,7 +6,6 @@ div {
     align-items: center;
     text-align: center;
     padding: 20px;
-
 }
 
 
@@ -27,3 +26,22 @@ h1{
     font-family: 'DM Sans', sans-serif;
     color: white;
 }
+}
+
+/* 
+@media (min-width: 766px) {
+    div {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    img {
+        width: 40%;
+        border-radius: 50%; 
+        margin-bottom: 10px;
+    }
+} */

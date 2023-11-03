@@ -54,7 +54,7 @@ class Dashboard extends HTMLElement {
               cards.setAttribute(Attributes.image, post.imageUrl);
             }
 
-            cards.setAttribute(Attributes.isLike, "../src/components/img/heart-regular.png");
+            cards.setAttribute(Attributes.like, "../../../dist/img/Me gusta.png");
             cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
 
             this.card.push(cards);
@@ -69,7 +69,7 @@ class Dashboard extends HTMLElement {
 
             const comments = await getComment(); (index.toString()); 
   
-  /
+  
   cardContainer.appendChild(commentsComponent);
   
 

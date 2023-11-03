@@ -40,19 +40,23 @@ class Profile extends HTMLElement {
   // Obtener los posts del artista utilizando la función getPostsByArtistId
   const artistPosts = await getPostsByArtistId(artistId);
   console.log(artistPosts);
+  const Profileconst = this.ownerDocument.createElement("div");
+  Profileconst.classList.add("Profilecont");
 
   // Mostrar las imágenes de los posts
   artistPosts.forEach((post) => {
     const postImage = this.ownerDocument.createElement("img");
     postImage.classList.add("upload-image")
     postImage.src = post.imageUrl;
-    Profilecont.appendChild(postImage);
+    Profileconst.appendChild(postImage);
+    Profilecont.appendChild(Profileconst)
+
   });
 } else {
   console.error("Artista no encontrado");
-}
-}
-}
+      }
+    }   
+  }
 }
 
 customElements.define("app-profile", Profile);

@@ -6,6 +6,7 @@
         color: white;
         text-decoration: none;
         list-style: none;
+        background-color: black;
         font-family: 'DM Sans', sans-serif;
 
         
@@ -125,7 +126,7 @@
     * {
         margin: 0;
         padding: 0;
-        background-color: #181E1A;
+        background-color: black;
         color: white;
         text-decoration: none;
         list-style: none;
@@ -135,8 +136,8 @@
     .instagram-profile {
         margin-top: 0;
         margin-left: auto; 
-        margin-right: 22%; 
-        width: 55%;
+        margin-right: 10%; 
+        width: 75%;
         padding-right: 3%; }
 
     .profile-image {
@@ -165,6 +166,7 @@
         font-size: 12px;
         font-weight: bold;
         max-height: 40px;
+        margin-left: 75%;
       
     }
 
@@ -181,10 +183,11 @@
 
     .desc {
         margin-top: 5%;
+        font-size: 18px;
         margin-bottom: 5%;
         color: #9a9a9a;
         width: 90%;
-        font-size: 12px;
+      
     }
 
     .profile-description {
@@ -199,16 +202,16 @@
     }
 
     .like-button {
-        width: 30%;
-        height: 30%;
+        width: 15%;
+        height: 15%;
         min-width: 10px;
         min-height: 30px;
         border-style: none;
     }
 
     .save-button {
-        width: 30%;
-        height: 30%;
+        width: 15%;
+        height: 15%;
         min-width: 10px;
         min-height: 30px;
         margin-right: 10%; 

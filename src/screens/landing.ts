@@ -17,8 +17,6 @@ class Landing extends HTMLElement {
 
   connectedCallback() {
     this.render();
-
-    
   }
 
 
@@ -31,6 +29,14 @@ class Landing extends HTMLElement {
 
         const mySec = this.ownerDocument.createElement("my-nav-invitation");
         this.shadowRoot?.appendChild(mySec);
+
+        const body= document.body;
+        const imageUrl=""
+        body.style.backgroundImage = `url(${imageUrl})`
+   
+        body.style.backgroundSize = "cover";
+
+        body.style.backgroundRepeat = "no-repeat";
 
     }}
   }

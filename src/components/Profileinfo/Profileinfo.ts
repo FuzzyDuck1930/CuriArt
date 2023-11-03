@@ -70,21 +70,25 @@ export enum AttributesProfile {
         profilename.innerHTML = `${this.username}`;
         this.shadowRoot.appendChild(profilename)
   
-        const profileocup = this.ownerDocument.createElement("p");
-        profileocup.innerHTML = `${this.occupation}`;
-        this.shadowRoot.appendChild(profileocup)
-  
         const profilebutton = this.ownerDocument.createElement("button");
         profilebutton .innerHTML = `EDIT PROFILE`;
         profilebutton.addEventListener("click", ()=>{
             dispatch(navigate(Screens.EDIT)) })
         this.shadowRoot.appendChild(profilebutton )
+
+        const logout = this.ownerDocument.createElement("button");
+        logout.innerHTML = `LOG OUT `;
+        logout.classList.add("btn-out")
+        logout.addEventListener("click", ()=>{
+            dispatch(navigate(Screens.LANDING)) })
+        this.shadowRoot.appendChild(logout)
+  
   
         
         container.appendChild(profileimage)
         container.appendChild(profilename)
-        container.appendChild(profileocup)
         container.appendChild(profilebutton)
+        container.appendChild(logout)
   
         
       }

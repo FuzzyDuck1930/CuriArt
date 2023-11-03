@@ -24,6 +24,8 @@ export const addPost = async (post:any) => {
 
  const userCollection = collection(db, "user")
  const postCollection = collection(db, "post");
+ const friendsCollection = collection(db, "friends");
+
 
 // Recupera los datos del usuario de Firebase 
  export async function getUserData() {
@@ -87,6 +89,63 @@ export const getComment = async () => {
   
     return artistPosts;
   }
+  export const addFavorite = async (userId: string, postId: string) => {
+    const favoritesCollection = collection(db, "favorites");
+    
+    try {
+      const favoriteData = {
+        userId: userId,
+        postId: postId,
+      };
+      
+      const docRef = await addDoc(favoritesCollection, favoriteData);
+      const docId = docRef.id; 
+      console.log("Documento agregado a la colección de favoritos con ID: ", docId);
+      return docId; 
+    } catch (error) {
+      console.error("Error al agregar un documento a la colección de favoritos: ", error);
+      return null; 
+    }
+  };
+
+
+  export const getFavorites = async (): Promise<FavoriteData[]> => {
+    const querySnapshot = await getDocs(collection(db, "favorites"));
+    const favorites: FavoriteData[] = [];
+  
+    querySnapshot.forEach((doc) => {
+      const favorite = doc.data() as FavoriteData;
+      favorites.push(favorite);
+    });
+  
+    return favorites;
+  }
+
+  export const addFriend = async (friendData:any) => {
+    try {
+      const friendRef = await addDoc(friendsCollection, friendData);
+      console.log("Amigo añadido con ID:", friendRef.id);
+      return friendRef.id;
+    } catch (error) {
+      console.error("Error al añadir amigo:", error);
+      return null;
+    }
+  }
+  export const getFriends = async () => {
+    const querySnapshot = await getDocs(friendsCollection);
+    const friendsData: any = [];
+  
+    querySnapshot.forEach((doc) => {
+      const friend = doc.data();
+      friendsData.push({
+        id: doc.id,
+        ...friend,
+      });
+    });
+  
+    return friendsData;
+  }
+  
 
 export default {
  
@@ -96,4 +155,8 @@ export default {
   addComment,
   getPostsByArtistId,
   addPost,
+  addFavorite,
+  getFavorites,
+  getFriends,
+  addFriend
 }
