@@ -61,23 +61,25 @@ import { Actions } from "../../types/store";
         <style>
         ${styleEdit}
         </style>
-        <div>
+        <div class="itAll">
+        <div class="theImg">
         <img class="profile-image" src="https://media.illustrationx.com/images/artist/LiamBrazier/145761/crop/500/film-character.jpg" alt="imagen de perfil">
         <button class="e-img">Edit image</button>
         </div>
 
-        <div>
-        <p>Username</p>
-        <input class="imputt" type="text">
-        <p>Password</p>
-        <input class="imputt" type="text">
-        <p>Email</p>
-        <input class="imputt" type="text">
-        <p>Work file</p>
-        <input class="imputt" type="text">
-        <p>Description</p>
-        <input class="imputt" type="text">
+        <div class="theInfo">
+        <p class="nameys">Username</p>
+        <input class="imputt" placeholder="Username" type="text">
+        <p class="nameys">Password</p>
+        <input class="imputt" placeholder="Password" type="text">
+        <p class="nameys">Email</p>
+        <input class="imputt" placeholder="Email" type="text">
+        <p class="nameys">Work file</p>
+        <input class="imputt" placeholder="Occupation" type="text">
+        <p class="nameys">Description</p>
+        <input class="imputt" placeholder="Description" type="text">
         <button class="save-all">Save changes</button>
+        </div>
         </div>
         `
         }

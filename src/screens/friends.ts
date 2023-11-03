@@ -13,8 +13,8 @@ class Friends extends HTMLElement {
         addObserver(this)
 	}
 
-	async connectedCallback() {
-		await this.render();
+	connectedCallback() {
+		this.render();
 	}
 
 	async render() {
@@ -23,9 +23,25 @@ class Friends extends HTMLElement {
         const myNav = this.ownerDocument.createElement("my-nav");
         this.shadowRoot?.appendChild(myNav);
 
-		const friendCard = this.ownerDocument.createElement("friend-card");
-		this.shadowRoot?.appendChild(friendCard);
+		const friendsList = this.ownerDocument.createElement("div");
+			this.shadowRoot?.appendChild(friendsList);
 
+			const artistId = 'Vzr3itFP1wwRWe24NSgK'; // Reemplaza 'ID_DEL_USUARIO' con el ID del usuario deseado
+
+			// Obtiene la lista de amigos del usuario con el artistId
+			const friendData = await getFriendsById(artistId);
+
+			if (friendData) {
+				// Itera sobre la lista de amigos y crea elementos friend-card
+				friendData.forEach((friend) => {
+					const friendCard = this.ownerDocument.createElement("friend-card");
+					friendCard.setAttribute(AttributesFriends.friendProfile, friend.profileimg); // Reemplaza con el campo correcto
+					friendCard.setAttribute(AttributesFriends.friendName, friend.username); // Reemplaza con el campo correcto
+					friendCard.setAttribute(AttributesFriends.friendOccupation, friend.occupation); // Reemplaza con el campo correcto
+					friendsList.appendChild(friendCard);
+				});
+				console.log(friendData)
+			}
 	}
 	}
 }
