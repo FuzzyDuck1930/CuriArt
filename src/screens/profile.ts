@@ -46,7 +46,7 @@ class Profile extends HTMLElement {
   // Mostrar las imágenes de los posts
   artistPosts.forEach((post) => {
     const postImage = this.ownerDocument.createElement("img");
-    postImage.classList.add("upload-image")
+
     postImage.src = post.imageUrl;
     Profileconst.appendChild(postImage);
     Profilecont.appendChild(Profileconst)

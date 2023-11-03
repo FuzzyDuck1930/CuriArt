@@ -32,7 +32,7 @@ class cardLog extends HTMLElement {
 
         const title = document.createElement('h1');
         title.classList.add('title');
-        title.textContent = 'Login';
+        title.textContent = 'LogIn';
 
         const usernameInput = document.createElement('input');
         usernameInput.classList.add('imputt');

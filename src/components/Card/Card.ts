@@ -99,17 +99,17 @@ class ArtistCard extends HTMLElement {
      }
    }
 
-//   toggleLike() {
-//      console.log("Botón de 'like' clicado"); // Agrega este log para verificar si la función se ejecuta
-//      dispatch(like());
-//      if (this.like?.endsWith("Me gusta.png")) {
-//        this.like = "../../../dist/img/Me gusta soid.png";
-//      } else {
-//        this.isLike = "../../../dist/img/Me gusta.png";
-//      }
-//      this.render();
-//  }
+    togglefav() {
+     if (this.like) {
+      if (this.save === "../../../dist/img/Favoritos.png") {
+        (this.save = "../../../dist/img/Favoritos-solid.png");
+       } else {
+        this.save = "../../../dist/img/Favoritos.png";
+       }
 
+       this.render();
+     }
+   }
 
 
   render() {
@@ -142,6 +142,12 @@ class ArtistCard extends HTMLElement {
        if (likeButton) {
          likeButton.addEventListener("click", () => {
            this.toggleLike();
+         });
+       }
+       const favButton = this.shadowRoot.querySelector(".save-button");
+       if (favButton) {
+         favButton.addEventListener("click", () => {
+           this.togglefav();
          });
        }
         

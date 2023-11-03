@@ -51,6 +51,7 @@ class cardFriend extends HTMLElement {
       <style>
       ${styleFriend}
       </style>
+      <div class="contenedor"
       <div class="cont-all">
       <div class="cont-image">
       <img class="profile-image" src="${this.friendprofile}" alt="imagen de perfil">
@@ -58,6 +59,7 @@ class cardFriend extends HTMLElement {
       <div class="cont-info">
       <b><p class="userName">${this.friendname}</p></b>
       <p class="userOcc">${this.friendoccupation}</p>
+      </div>
       </div>
       </div>
       `

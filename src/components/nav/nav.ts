@@ -43,6 +43,9 @@ class Nav extends HTMLElement{
             const friends = this.ownerDocument.createElement("navegation-button")
             friends.setAttribute("icon", "/dist/img/Amigos.png")
             friends.setAttribute("text","Friends" )
+            const textElement = this.ownerDocument.createElement("span");
+            textElement.textContent = "friends";
+            textElement.classList.add("customclass")
             friends.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.FRIENDS)) })
             nav.appendChild(friends);
@@ -70,7 +73,7 @@ class Nav extends HTMLElement{
             userimg.classList.add("mi-butn-img");
             userimg.addEventListener("click", ()=>{
                 dispatch(navigate(Screens.PROFILE)) })
-            nav.appendChild(setting);
+       
            
            
         

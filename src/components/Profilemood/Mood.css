@@ -27,9 +27,8 @@ h1{
     color: white;
 }
 }
-
-/* 
-@media (min-width: 766px) {
+ 
+ /* @media (min-width: 767px) {
     div {
         z-index: 1;
         display: flex;
@@ -41,7 +40,10 @@ h1{
 
     img {
         width: 40%;
-        border-radius: 50%; 
+        border-radius: 500px; 
         margin-bottom: 10px;
     }
-} */
+    p{
+        color: white;
+    }
+}  */
