@@ -25,7 +25,7 @@ class Profile extends HTMLElement {
       Profilecont.classList.add("Profilecontainer");
       this.shadowRoot?.appendChild(Profilecont);
 
-      const artistId = "Vzr3itFP1wwRWe24NSgK"; // El ID del artista deseado
+      const artistId = "Vzr3itFP1wwRWe24NSgK"; 
       const userData = await getUserData();
       const user = userData.find((user) => user.id === artistId);
 
@@ -46,6 +46,7 @@ class Profile extends HTMLElement {
   // Mostrar las imágenes de los posts
   artistPosts.forEach((post) => {
     const postImage = this.ownerDocument.createElement("img");
+    postImage.classList.add("imgs-profil") 
 
     postImage.src = post.imageUrl;
     Profileconst.appendChild(postImage);

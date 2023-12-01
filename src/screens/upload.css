@@ -45,7 +45,14 @@
   .Uploadcontainer{
     z-index: 2;
     margin-top: 0px;
-  }}
+  }
+
+#file-upload-button{
+  color: aliceblue;
+  background-color: #ff7803;
+
+
+}}
 
   @media (max-width: 767px) {
     .input-style {

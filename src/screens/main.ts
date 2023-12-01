@@ -1,11 +1,10 @@
 import ArtistCard, { Attributes } from "../components/Card/Card";
-import Comment from "../components/Comments/Comments";
 import { addObserver, appState, dispatch } from "../store/index";
 import { navigate } from "../store/actions";
 import "../components/export";
 import styleMain from "./main.css";
-import firebase from "../utils/firebase"
-import { getComment, addComment,getPostData, getUserData} from "../utils/firebase";
+import firebase from "../utils/firebase";
+import { getPostData, getUserData,escuchar } from "../utils/firebase";
 
 class Dashboard extends HTMLElement {
   card: ArtistCard[] = [];
@@ -16,18 +15,17 @@ class Dashboard extends HTMLElement {
     addObserver(this);
   }
 
-   connectedCallback() {
-    this.render();
+  async connectedCallback() {
+    escuchar((post: any) => {
+      this.render();
+    });
   }
 
   async render() {
-
     try {
-      
       const userData = await getUserData();
       const postData = await getPostData();
       console.log(userData);
-      console.log(postData);
 
       if (this.shadowRoot) {
         this.shadowRoot.innerHTML = `<style>${styleMain}</style>`;
@@ -40,46 +38,26 @@ class Dashboard extends HTMLElement {
           container.classList.add("user-card-container");
 
           userData.forEach((user) => {
-            const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
-            cards.setAttribute(Attributes.profileimg, user.profileimg);
-            cards.setAttribute(Attributes.username, user.username);
-            cards.setAttribute(Attributes.occupation, user.occupation);
+            const userPosts = postData.filter((post) => post.userId === user.id);
 
-            // Encuentra el post correspondiente al usuario actual
-            const post = postData.find((post) => post.userId === user.id);
+            userPosts.forEach((post) => {
+              const cards = this.ownerDocument.createElement("artist-card") as ArtistCard;
+              cards.setAttribute(Attributes.profileimg, user.profileimg);
+              cards.setAttribute(Attributes.username, user.username);
+              cards.setAttribute(Attributes.occupation, user.occupation);
 
-            if (post) {
-              // Si se encontró un post, configura la descripción e imagen del post
               cards.setAttribute(Attributes.description, post.description);
               cards.setAttribute(Attributes.image, post.imageUrl);
-            }
 
-            cards.setAttribute(Attributes.like, "../../../dist/img/Me gusta.png");
-            cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
+              cards.setAttribute(Attributes.like, "../../../dist/img/Me gusta.png");
+              cards.setAttribute(Attributes.save, "../../dist/img/Favoritos.png");
 
-            this.card.push(cards);
+              this.card.push(cards);
+            });
           });
 
-          this.card.forEach(async (usercard, index) => {
-            const cardContainer = this.ownerDocument.createElement("div");
-            cardContainer.classList.add("user-card");
-            cardContainer.appendChild(usercard);
-            const commentsComponent = this.ownerDocument.createElement("my-comments");
-            commentsComponent.setAttribute('cardId', index.toString()); 
-
-            const comments = await getComment(); (index.toString()); 
-  
-  
-  cardContainer.appendChild(commentsComponent);
-  
-
-            cardContainer.appendChild(commentsComponent);
-       
-
-            container.appendChild(cardContainer);
-          });
-
-          this.shadowRoot?.appendChild(container);
+          this.card.forEach((card) => container.appendChild(card));
+          this.shadowRoot.appendChild(container);
         }
       }
     } catch (error) {

@@ -29,7 +29,9 @@ class Register extends HTMLElement {
         this.shadowRoot?.appendChild(loginCard);
 
         const Logo = this.ownerDocument.createElement("img")
+		Logo.classList.add ("logo")
         Logo.setAttribute("src", "/dist/img/CURIART.png")
+		Logo.classList.add("Logo")
         Logo.setAttribute("class", "Logo")
         Logo.addEventListener("click", ()=>{
             dispatch(navigate(Screens.LANDING)) })
