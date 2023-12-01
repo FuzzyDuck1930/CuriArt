@@ -1,7 +1,0 @@
-export {default as Card} from "./Card/Card"
-export {default as Nav} from "./nav/nav"
-export {default as NavLanding} from "./navLanding/navLanding"
-export {default as cardLog} from "./cardLog/cardLog"
-export {default as cardSign} from "./cardSign/cardSign"
-export {default as editInfo} from "./editInfo/editInfo"
-export {default as cardFriend} from "./cardFriend/cardFriend"
