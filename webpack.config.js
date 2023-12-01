@@ -4,6 +4,10 @@ module.exports = {
 entry: './src/index.ts',
 module: {
     rules: [
+        {
+            test: /\.css?$/i,
+            use: ['css-loader'],
+        },
     {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -18,4 +22,5 @@ output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
 },
+experiments: { topLevelAwait: true },
 };

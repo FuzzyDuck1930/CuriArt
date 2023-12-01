@@ -1,0 +1,13 @@
+
+@media (max-width: 768px) {
+.Logo{
+ 
+    width: 5px;
+  
+}
+}
+@media (max-width: 767px) {
+.Logo{
+    margin-left: 300px;
+    width: 140px;
+}}
