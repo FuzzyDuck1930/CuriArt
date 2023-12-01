@@ -1,15 +1,16 @@
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .Profilecontainer{
     z-index: 2;
     margin-top: 0px;
 
 }
-img{
-    max-width: 40%;
- 
-}
-img{
-    width: 200px;
+
+.imgs-profil{
+justify-content: center;
+text-align: center;
+align-items: center;
+
+    
 }
 .upload-image{
    width: 200px;
