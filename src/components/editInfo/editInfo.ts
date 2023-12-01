@@ -1,6 +1,9 @@
 import styleEdit from "./editInfo.css"
 import { dispatch } from "../../store";
 import { Actions } from "../../types/store";
+import { Screens } from "../../types/navegation";
+import { navigate } from "../../store/actions";
+
 
 
     export enum Attributes {
@@ -52,6 +55,7 @@ import { Actions } from "../../types/store";
 
 
     connectedCallback() {
+        
         this.render();
     }
 
@@ -82,11 +86,19 @@ import { Actions } from "../../types/store";
         </div>
         </div>
         `
-        }
+        const saveAllButton = this.shadowRoot.querySelector('.save-all');
 
+      if (saveAllButton) {
+        saveAllButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          dispatch(navigate(Screens.PROFILE));
+        });
+      } else {
+        console.error("error");
+      }
     }
-
-    }
+  }
+}
 
     customElements.define("edit-card", editInfo);
     export default editInfo;

@@ -1,26 +1,39 @@
 import { initializeApp } from "firebase/app";
-import { collection, addDoc,getDocs,where, setDoc, getFirestore, query } from "firebase/firestore";
+import { collection, addDoc,getDocs,where, setDoc, getFirestore, query,onSnapshot,doc  } from "firebase/firestore";
 import { UserData } from "../types/userdata";
 import { FavoriteData } from "../types/favorite";
 import { PostData } from "../types/post";
 import { firebaseConfig } from "../service/firebaseConfig";
-import { Comments } from "../components/export";
+import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+
 
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app); 
 
-export const addPost = async (post:any) => {
+//agregar imagen al storage 
+
+export const addPost = async (file: File, description: string, userId: string) => {
   try {
-    const postData = collection (db, "post");
-    await addDoc(postData,post)
-    console.log("Se añadio un post")
-    
+    const storageRef = ref(storage, file.name);
+    const res = await uploadBytes(storageRef, file);
+    const imageStorageRef = ref(storage, file.name)
+    const imageURL = await getDownloadURL(imageStorageRef)
+    console.log("Image uploaded successfully", res);
+
+    const postCollection = collection(db, "post");
+    const newPost = {
+      imageUrl: imageURL,
+      description: description,
+      userId: userId,
+    };
+
+    await addDoc(postCollection, newPost);
   } catch (error) {
-    console.error(error);
-    
+    console.error("Error adding post:", error);
   }
-}
+};
 
  const userCollection = collection(db, "user")
  const postCollection = collection(db, "post");
@@ -28,6 +41,7 @@ export const addPost = async (post:any) => {
 
 
 // Recupera los datos del usuario de Firebase 
+
  export async function getUserData() {
   const querySnapshot = await getDocs(userCollection);
   const userData: UserData[] = [];
@@ -41,6 +55,7 @@ export const addPost = async (post:any) => {
   return userData;
 }
 // Recupera los datos del post de Firebase 
+
  export async function getPostData(): Promise<PostData[]> {
   const querySnapshot = await getDocs(postCollection);
   const postData: PostData[] = [];
@@ -48,35 +63,12 @@ export const addPost = async (post:any) => {
     const post = doc.data() as PostData;
     postData.push(post);
   });
+  console.log(postData);
   return postData;
 }
-export const addComment = async (comments:any) => {
-  try {
-    const commentData = collection (db, "comments");
-    await addDoc(commentData,comments);
-    console.log("Se añadio un comentario")
-    
-  } catch (error) {
-    console.error(error);
-    
-  }
-}
-export const getComment = async () => {
-
-    const querySnapshot =  await getDocs (collection(db, "comments"));
-    const commented :any  = [];
-
-    querySnapshot.forEach((doc) => {
-      const comment = doc.data();
-      commented.push({
-        id:doc.id,
-        ...comment
-      });
-    })
-    return commented
-  }
 
 
+//obtener el id del artista
   export async function getPostsByArtistId(artistId: string): Promise<PostData[]> {
     const q = query(postCollection, where("userId", "==", artistId));
     const querySnapshot = await getDocs(q);
@@ -89,25 +81,20 @@ export const getComment = async () => {
   
     return artistPosts;
   }
-  export const addFavorite = async (userId: string, postId: string) => {
-    const favoritesCollection = collection(db, "favorites");
-    
-    try {
-      const favoriteData = {
-        userId: userId,
-        postId: postId,
-      };
-      
-      const docRef = await addDoc(favoritesCollection, favoriteData);
-      const docId = docRef.id; 
-      console.log("Documento agregado a la colección de favoritos con ID: ", docId);
-      return docId; 
-    } catch (error) {
-      console.error("Error al agregar un documento a la colección de favoritos: ", error);
-      return null; 
-    }
-  };
+//agregar a favoritos 
+  export const addFavorite = async (index: number) => {
+    const dataPost = await  getPostData();
+    const docRef = await addDoc(collection(db, "favorites"), {
+      id: dataPost[index].userId,
+      imageurl: dataPost[index].imageUrl,
+      description: dataPost[index].description,
+    });
+   
+  }
 
+
+
+//obtener favoritos
 
   export const getFavorites = async (): Promise<FavoriteData[]> => {
     const querySnapshot = await getDocs(collection(db, "favorites"));
@@ -120,6 +107,7 @@ export const getComment = async () => {
   
     return favorites;
   }
+//añadir a amigos
 
   export const addFriend = async (friendData:any) => {
     try {
@@ -131,6 +119,8 @@ export const getComment = async () => {
       return null;
     }
   }
+  //obtener amigos
+
   export const getFriends = async () => {
     const querySnapshot = await getDocs(friendsCollection);
     const friendsData: any = [];
@@ -145,14 +135,26 @@ export const getComment = async () => {
   
     return friendsData;
   }
+  //escuchar en tiempo real
+  export const escuchar = (fn:any) => {
+    const q = query(collection(db, "post"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const post:any = [];
+  querySnapshot.forEach((doc) => {
+      post.push(doc.data().text);
+      console.log(doc.data());
+  });
+  console.log( post.join(", "));
+  fn(post)
+  });
   
+}
 
 export default {
  
   getUserData,
   getPostData,
-  getComment,
-  addComment,
+  escuchar,
   getPostsByArtistId,
   addPost,
   addFavorite,

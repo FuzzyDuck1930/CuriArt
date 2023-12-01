@@ -34,10 +34,10 @@ class cardLog extends HTMLElement {
         title.classList.add('title');
         title.textContent = 'LogIn';
 
-        const usernameInput = document.createElement('input');
-        usernameInput.classList.add('imputt');
-        usernameInput.setAttribute('placeholder', 'Username');
-        usernameInput.setAttribute('type', 'text');
+        const emailInput = document.createElement('input');
+        emailInput.classList.add('imputt');
+        emailInput.setAttribute('placeholder', 'Email');
+        emailInput.setAttribute('type', 'text');
 
         const passwordInput = document.createElement('input');
         passwordInput.classList.add('imputt');
@@ -67,7 +67,7 @@ class cardLog extends HTMLElement {
         signUpButton.textContent = 'Sign Up';
 
         contAll.appendChild(title);
-        contAll.appendChild(usernameInput);
+        contAll.appendChild(emailInput);
         contAll.appendChild(passwordInput);
         contAll.appendChild(accessButton);
         contAll.appendChild(contAlter);

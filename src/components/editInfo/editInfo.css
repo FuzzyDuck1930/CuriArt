@@ -1,7 +1,7 @@
 @media (min-width: 768px) {
     *{
     width: 40%;
-    color: white;
+
     text-decoration: none;
     font-family: 'DM Sans', sans-serif;
     }
@@ -73,7 +73,7 @@
 }
 
 .imputt::placeholder{
-    color: rgb(65, 62, 62);
+    color: rgb(87, 84, 84);
 }
 
 }

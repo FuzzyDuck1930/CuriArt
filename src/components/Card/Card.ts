@@ -1,7 +1,7 @@
 import styleCard from "./Card.css"
 import { dispatch } from "../../store";
 import { Actions } from "../../types/store";
-
+import { addFavorite } from "../../utils/firebase";
 
 export enum Attributes {
   "profileimg" = "profileimg",
@@ -11,7 +11,8 @@ export enum Attributes {
   "image" = "image",
   "like"="like",
   "save"="save",
-  "follow"= "follow"
+  "follow"= "follow",
+  "index" = "index"
 
 }
 
@@ -26,6 +27,7 @@ class ArtistCard extends HTMLElement {
   like?: string;
   save?: string;
   follow?:string;
+  index?: string = ""
 
 
   static get observedAttributes() {
@@ -38,6 +40,7 @@ class ArtistCard extends HTMLElement {
       like:null,
       save:null,
       follow:null,
+      index: null,
 
     };
     return Object.keys(attributes);
@@ -134,6 +137,10 @@ class ArtistCard extends HTMLElement {
         </div>
         </div>
       `
+      // const saveButton = this.shadowRoot.querySelector(".save-button");
+      // saveButton?.addEventListener("click", async () => {
+      //     await addFavorite(parseInt(this.index));
+      // });
       if (this.followButton) {
         this.shadowRoot.querySelector("div")?.insertBefore(this.followButton, this.shadowRoot.querySelector("p"));
       }
