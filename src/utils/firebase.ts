@@ -3,6 +3,7 @@ import { collection, addDoc,getDocs,where, setDoc, getFirestore, query,onSnapsho
 import { UserData } from "../types/userdata";
 import { FavoriteData } from "../types/favorite";
 import { PostData } from "../types/post";
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence} from "firebase/auth";
 import { firebaseConfig } from "../service/firebaseConfig";
 import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
 
@@ -11,6 +12,53 @@ import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app); 
+
+export const auth = getAuth(app);
+
+const createUser = async (email: string,password: string, username: string, occupation: string) => {
+  //Primer paso: Crear usuario con auth
+  createUserWithEmailAndPassword(auth,email,password).then(async (userCredential) => {
+    const user = userCredential.user;
+    console.log(user.uid);
+    //Segundo paso: Crear datos del usuario en la
+    //colección user
+    try {
+      const where = doc(db, "user", user.uid);
+      const data = {
+        username: username,
+        occupation: occupation
+      }
+      await setDoc(where, data);
+      console.log("Se añadió")
+    } catch (error) {
+      console.error(error);
+    }
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+}
+
+const loginUser = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  setPersistence(auth, browserSessionPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+  });
+};
+
 
 //agregar imagen al storage 
 
@@ -160,5 +208,7 @@ export default {
   addFavorite,
   getFavorites,
   getFriends,
-  addFriend
+  addFriend,
+  loginUser,
+  createUser
 }

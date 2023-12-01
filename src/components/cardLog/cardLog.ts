@@ -2,7 +2,9 @@ import styleLog from "./cardLog.css"
 import { navigate } from "../../store/actions";
 import { dispatch } from "../../store";
 import { Screens } from "../../types/navegation";
+import Firebase from "../../utils/firebase";
 
+const credentials = { email: "", password: ""};
 
 class cardLog extends HTMLElement {
 
@@ -18,6 +20,9 @@ class cardLog extends HTMLElement {
 
     }
 
+    async handleLoginButton() {
+        Firebase.loginUser(credentials);
+    }
 
     render() {
     if (this.shadowRoot) {
@@ -26,7 +31,7 @@ class cardLog extends HTMLElement {
         ${styleLog}
         </style>
         `
-    
+
         const contAll = document.createElement('div');
         contAll.classList.add('cont-all');
 
@@ -36,20 +41,26 @@ class cardLog extends HTMLElement {
 
         const emailInput = document.createElement('input');
         emailInput.classList.add('imputt');
-        emailInput.setAttribute('placeholder', 'Email');
-        emailInput.setAttribute('type', 'text');
+        emailInput.setAttribute('placeholder', 'E-Mail');
+        emailInput.type = "email";
+        emailInput.addEventListener(
+      "change",
+      (e: any) => (credentials.email = e.target.value)
+    );
 
         const passwordInput = document.createElement('input');
         passwordInput.classList.add('imputt');
         passwordInput.setAttribute('placeholder', 'Password');
-        passwordInput.setAttribute('type', 'text');
+        passwordInput.type = "password";
+        passwordInput.addEventListener(
+          "change",
+          (e: any) => (credentials.password = e.target.value)
+        );
 
-        const accessButton = document.createElement('button');
+         const accessButton = document.createElement('button');
         accessButton.classList.add('access');
         accessButton.textContent = 'Login';
-         accessButton.addEventListener('click', () => {
-        dispatch(navigate(Screens.DASHBOARD));
- });
+        accessButton.addEventListener("click", this.handleLoginButton);
 
 
         const contAlter = document.createElement('div');
@@ -58,13 +69,14 @@ class cardLog extends HTMLElement {
         const message = document.createElement('p');
         message.classList.add('message');
         message.textContent = "Don't have an account?";
-       message.addEventListener('click', () => {
-            dispatch(navigate(Screens.SIGNUP));
-     });
 
         const signUpButton = document.createElement('button');
         signUpButton.classList.add('account');
         signUpButton.textContent = 'Sign Up';
+        signUpButton.addEventListener('click', () => {
+            dispatch(navigate(Screens.SIGNUP));
+     });
+
 
         contAll.appendChild(title);
         contAll.appendChild(emailInput);
